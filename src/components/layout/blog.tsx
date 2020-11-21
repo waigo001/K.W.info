@@ -4,6 +4,7 @@ import {
   Hidden,
   IconButton,
   makeStyles,
+  Paper,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -45,7 +46,7 @@ const indexPage = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar color="transparent">
+      <AppBar color="inherit">
         <Toolbar variant="dense">
           <div className={classes.title}>
             <Title />
@@ -56,43 +57,46 @@ const indexPage = ({ children }) => {
       <main>
         <Toolbar variant="dense" />
         {children}
+        <Toolbar variant="dense" />
       </main>
       <footer className={classes.bottomAppbar}>
-        <Toolbar variant="dense">
-          <Typography className={classes.bottomText}>
-            <Hidden xsDown>Copyright</Hidden> &copy; 2020 <Title />
-            <Hidden xsDown>
-              <span className={classes.spacer}>All rights reserved.</span>
-            </Hidden>
-          </Typography>
+        <Paper elevation={4}>
+          <Toolbar variant="dense">
+            <Typography className={classes.bottomText}>
+              <Hidden xsDown>Copyright</Hidden> &copy; 2020 <Title />
+              <Hidden xsDown>
+                <span className={classes.spacer}>All rights reserved.</span>
+              </Hidden>
+            </Typography>
 
-          <IconButton
-            aria-label="Github"
-            href="https://github.com/waigo001"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GitHub />
-          </IconButton>
+            <IconButton
+              aria-label="Github"
+              href="https://github.com/waigo001"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GitHub />
+            </IconButton>
 
-          <IconButton
-            aria-label="Twitter"
-            href="https://twitter.com/waigo001"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Twitter />
-          </IconButton>
+            <IconButton
+              aria-label="Twitter"
+              href="https://twitter.com/waigo001"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Twitter />
+            </IconButton>
 
-          <IconButton
-            aria-label="Instagram"
-            href="https://www.instagram.com/waigo001/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Instagram />
-          </IconButton>
-        </Toolbar>
+            <IconButton
+              aria-label="Instagram"
+              href="https://www.instagram.com/waigo001/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Instagram />
+            </IconButton>
+          </Toolbar>
+        </Paper>
       </footer>
     </ThemeProvider>
   )
