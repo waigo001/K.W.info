@@ -1,8 +1,10 @@
 import {
+  createStyles,
+  CssBaseline,
   Grid,
   IconButton,
   makeStyles,
-  MuiThemeProvider,
+  ThemeProvider,
   Typography,
 } from "@material-ui/core"
 import { GitHub, Instagram, Twitter } from "@material-ui/icons"
@@ -17,10 +19,11 @@ const useStyles = makeStyles({
   },
   linkButton: {
     margin: theme.spacing(1),
+    color: theme.palette.text.secondary,
   },
   bottomText: {
     margin: theme.spacing(3),
-    fontSize: "12px",
+    fontSize: "0.75rem",
     fontWeight: 700,
     color: theme.palette.text.secondary,
     letterSpacing: "2px",
@@ -31,7 +34,8 @@ const indexPage = ({ children }) => {
   const classes = useStyles()
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <header>
         <Typography
           variant="h2"
@@ -86,7 +90,7 @@ const indexPage = ({ children }) => {
           All rights reserved.
         </Typography>
       </footer>
-    </MuiThemeProvider>
+    </ThemeProvider>
   )
 }
 indexPage.propTypes = {

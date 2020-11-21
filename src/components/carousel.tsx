@@ -4,7 +4,6 @@ import {
   makeStyles,
   MobileStepper,
   Typography,
-  useTheme,
 } from "@material-ui/core"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons"
 import React from "react"
@@ -30,9 +29,6 @@ const useStyles = makeStyles({
     color: theme.palette.text.secondary,
     letterSpacing: 2,
     margin: theme.spacing(1),
-  },
-  rootstepper: {
-    background: "#FFFFFF",
   },
   dot: {
     width: "12px",
@@ -66,8 +62,7 @@ const titleSample = [
 ]
 
 const Carousel = () => {
-  const theme = useTheme()
-  const classes = useStyles()
+  const classes = useStyles(theme)
 
   const [activeStep, setActiveStep] = React.useState(0)
   const maxSteps = 3
@@ -124,7 +119,6 @@ const Carousel = () => {
           variant="dots"
           activeStep={activeStep}
           classes={{
-            root: classes.rootstepper,
             dotActive: classes.dotActive,
             dot: classes.dot,
           }}

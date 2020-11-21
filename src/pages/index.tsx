@@ -7,27 +7,24 @@ import InfoIcon from "@material-ui/icons/Info"
 import {
   Button,
   Container,
-  createStyles,
   Grid,
   makeStyles,
-  Theme,
 } from "@material-ui/core"
 
 import Carousel from "../components/carousel"
 import { Link } from "gatsby"
+import theme from "../styles/theme"
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      margin: theme.spacing(2),
-      color: theme.palette.text.secondary,
-      fontWeight: 700,
-    },
-  })
-)
+const useStyles = makeStyles({
+  button: {
+    margin: theme.spacing(2),
+    color: theme.palette.text.secondary,
+    fontWeight: 700,
+  },
+})
 
 const IndexPage = () => {
-  const classes = useStyles()
+  const classes = useStyles(theme)
 
   return (
     <Layout>
