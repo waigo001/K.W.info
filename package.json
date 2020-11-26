@@ -19,6 +19,7 @@
     "gatsby-plugin-offline": "^3.2.30",
     "gatsby-plugin-react-helmet": "^3.3.12",
     "gatsby-plugin-sharp": "^2.6.38",
+    "gatsby-plugin-typegen": "^2.2.1",
     "gatsby-source-filesystem": "^2.3.32",
     "gatsby-source-microcms": "^1.0.1",
     "gatsby-transformer-sharp": "^2.5.16",
@@ -29,6 +30,8 @@
     "react-swipeable-views": "^0.13.9"
   },
   "devDependencies": {
+    "@types/react-swipeable-views": "^0.13.0",
+    "@types/react-swipeable-views-utils": "^0.13.2",
     "prettier": "2.1.2"
   },
   "keywords": [
