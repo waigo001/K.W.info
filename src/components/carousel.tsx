@@ -1,11 +1,14 @@
 import {
+  Box,
   Container,
+  createStyles,
   IconButton,
   makeStyles,
   MobileStepper,
   Typography,
 } from "@material-ui/core"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
@@ -18,21 +21,21 @@ const useStyles = makeStyles({
     margin: theme.spacing(2),
   },
   title: {
-    fontSize: "48px",
+    fontSize: "3rem",
     fontWeight: 700,
     color: theme.palette.text.secondary,
     margin: theme.spacing(2),
   },
   subTitle: {
     fontWeight: 700,
-    fontSize: "12px",
+    fontSize: "0.8rem",
     color: theme.palette.text.secondary,
     letterSpacing: 2,
     margin: theme.spacing(1),
   },
   dot: {
-    width: "12px",
-    height: "12px",
+    width: "0.8rem",
+    height: "0.8rem",
     margin: "0 6px",
   },
   dotActive: {
@@ -43,29 +46,46 @@ const useStyles = makeStyles({
   },
 })
 
-const titleSample = [
-  {
-    publishedDate: "2020/10/20",
-    title: "サンプルタイトル",
-    tags: ["ブログ", "Gatsby"],
-  },
-  {
-    publishedDate: "2020/10/22",
-    title: "PostCoffeeを試してみた件",
-    tags: ["PostCoffee", "コーヒー"],
-  },
-  {
-    publishedDate: "2020/10/24",
-    title: "ブログを今の環境(Firebase)から移行する",
-    tags: ["ブログ", "Gatsby"],
-  },
-]
+const Tag: React.FC<{
+  props:
+    | GatsbyTypes.Maybe<Pick<GatsbyTypes.MicrocmsBlogsTags, "title" | "slug">>
+    | undefined
+}> = ({ props }) => {
+  let contents = <></>
+  if (props !== undefined) {
+    if (props.slug !== undefined && props.title !== undefined)
+      contents = (
+        <Box component="span" margin={1}>
+          #{props.title}
+        </Box>
+      )
+  }
+  return contents
+}
 
-const Carousel = () => {
+const Carousel: React.FC = () => {
   const classes = useStyles(theme)
 
+  const data = useStaticQuery<GatsbyTypes.BlogsQuery>(graphql`
+    query Blogs {
+      allMicrocmsBlogs {
+        nodes {
+          body
+          description
+          slug
+          tags {
+            slug
+            title
+          }
+          title
+          publishedAt
+        }
+      }
+    }
+  `)
+
   const [activeStep, setActiveStep] = React.useState(0)
-  const maxSteps = 3
+  const maxSteps = data.allMicrocmsBlogs.nodes.length
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1)
@@ -88,13 +108,13 @@ const Carousel = () => {
         enableMouseEvents
         interval={5000}
       >
-        {titleSample.map((step, index) => (
+        {data.allMicrocmsBlogs.nodes.map(step => (
           <div key={step.title}>
             <Typography className={classes.subTitle} align="center">
               published at
             </Typography>
             <Typography className={classes.subTitle} align="center">
-              {step.publishedDate}
+              {step.publishedAt}
             </Typography>
             <Typography className={classes.title} align="center">
               {step.title}
@@ -103,11 +123,11 @@ const Carousel = () => {
               tags
             </Typography>
             <Typography className={classes.subTitle} align="center">
-              {step.tags.map(key => (
-                <span className={classes.tag} key={key}>
-                  #{key}
-                </span>
-              ))}
+              {step.tags !== undefined ? (
+                step.tags.map(key => <Tag props={key} />)
+              ) : (
+                <></>
+              )}
             </Typography>
           </div>
         ))}
