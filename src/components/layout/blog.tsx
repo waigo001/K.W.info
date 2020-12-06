@@ -5,7 +5,6 @@ import {
   Drawer,
   Hidden,
   IconButton,
-  LinkProps,
   List,
   ListItem,
   ListItemIcon,
@@ -25,7 +24,7 @@ import InfoIcon from "@material-ui/icons/Info"
 import MenuIcon from "@material-ui/icons/Menu"
 
 import PropTypes from "prop-types"
-import React from "react"
+import React, { ReactNode } from "react"
 import theme from "../../styles/theme"
 import Title from "../title"
 
@@ -93,7 +92,7 @@ function ListItemLink(props: ListItemLinkProps) {
   )
 }
 
-const indexPage = ({ children }) => {
+const indexPage: React.FC<ReactNode> = ({ children }) => {
   const classes = useStyles()
   const [state, setState] = React.useState(false)
 

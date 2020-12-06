@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core"
 import { GitHub, Instagram, Twitter } from "@material-ui/icons"
 import PropTypes from "prop-types"
-import React from "react"
+import React, { ReactNode } from "react"
 import theme from "../../styles/theme"
 import Title from "../title"
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 })
 
-const indexPage = ({ children }) => {
+const indexPage: React.FC<ReactNode> = ({ children }) => {
   const classes = useStyles()
 
   return (
