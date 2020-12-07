@@ -13,6 +13,7 @@ import React from "react"
 import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
 import theme from "../styles/theme"
+import { format, parseISO } from "date-fns"
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
@@ -68,7 +69,7 @@ const Carousel: React.FC = () => {
 
   const data = useStaticQuery<GatsbyTypes.BlogsQuery>(graphql`
     query Blogs {
-      allMicrocmsBlogs {
+      allMicrocmsBlogs(limit: 3, sort: { fields: updatedAt, order: DESC }) {
         nodes {
           body
           description
@@ -85,7 +86,10 @@ const Carousel: React.FC = () => {
   `)
 
   const [activeStep, setActiveStep] = React.useState(0)
-  const maxSteps = data.allMicrocmsBlogs.nodes.length
+
+  let maxSteps = 3
+  if (data.allMicrocmsBlogs.nodes.length < 3)
+    maxSteps = data.allMicrocmsBlogs.nodes.length
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1)
@@ -114,7 +118,9 @@ const Carousel: React.FC = () => {
               published at
             </Typography>
             <Typography className={classes.subTitle} align="center">
-              {step.publishedAt}
+              {step.publishedAt !== undefined
+                ? format(parseISO(step.publishedAt), "yyyy/MM/dd")
+                : ""}
             </Typography>
             <Typography className={classes.title} align="center">
               {step.title}
