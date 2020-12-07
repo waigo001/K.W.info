@@ -19,24 +19,48 @@ import React from "react"
 import Layout from "../components/layout/blog"
 import SEO from "../components/seo"
 import theme from "../styles/theme"
+import { graphql, PageProps } from "gatsby"
+import { format, parseISO } from "date-fns"
 
-const titleSample = [
-  {
-    publishedDate: "2020/10/20",
-    title: "サンプルタイトル",
-    tags: ["ブログ", "Gatsby"],
-  },
-  {
-    publishedDate: "2020/10/22",
-    title: "PostCoffeeを試してみた件",
-    tags: ["PostCoffee", "コーヒー"],
-  },
-  {
-    publishedDate: "2020/10/24",
-    title: "ブログを今の環境(Firebase)から移行する",
-    tags: ["ブログ", "Gatsby"],
-  },
-]
+export const query = graphql`
+  query BlogPages {
+    allMicrocmsBlogs(sort: { fields: updatedAt, order: DESC }) {
+      nodes {
+        body
+        description
+        slug
+        tags {
+          slug
+          title
+        }
+        title
+        publishedAt
+      }
+    }
+  }
+`
+
+const Tag: React.FC<{
+  props:
+    | GatsbyTypes.Maybe<Pick<GatsbyTypes.MicrocmsBlogsTags, "title" | "slug">>
+    | undefined
+}> = ({ props }) => {
+  let contents = <></>
+  const classes = useStyles()
+  if (props !== undefined) {
+    if (props.slug !== undefined && props.title !== undefined)
+      contents = (
+        <Chip
+          label={props.title}
+          variant="outlined"
+          size="small"
+          key={props.slug}
+          className={classes.chip}
+        />
+      )
+  }
+  return contents
+}
 
 const useStyles = makeStyles({
   container: {
@@ -70,9 +94,11 @@ const useStyles = makeStyles({
   },
 })
 
-const BlogPage = () => {
+const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
+  data,
+}) => {
   const classes = useStyles()
-  const items = titleSample.map(step => (
+  const items = data.allMicrocmsBlogs.nodes.map(step => (
     <Grid item xs={12} sm={6} md={4} key={step.title}>
       <Card className={classes.card} elevation={2}>
         <CardContent className={classes.cardContent}>
@@ -83,8 +109,10 @@ const BlogPage = () => {
             fontSize="small"
           >
             <WatchLaterIcon className={classes.timeIcon} />
-            <time dateTime="2011-11-18T14:54:39.929Z">
-              {step.publishedDate}
+            <time dateTime={step.publishedAt}>
+              {step.publishedAt !== undefined
+                ? format(parseISO(step.publishedAt), "yyyy/MM/dd")
+                : "NO DATA"}
             </time>
           </Box>
           <Typography className={classes.cardTitle} component="h2">
@@ -102,15 +130,11 @@ const BlogPage = () => {
             タグ
           </Box>
           <Box>
-            {step.tags.map(tag => (
-              <Chip
-                label={tag}
-                variant="outlined"
-                size="small"
-                key={tag}
-                className={classes.chip}
-              />
-            ))}
+            {step.tags !== undefined ? (
+              step.tags.map(key => <Tag props={key} />)
+            ) : (
+              <></>
+            )}
           </Box>
         </CardContent>
         <CardActions className={classes.cardActions}>
