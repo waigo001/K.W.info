@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  Chip,
   Container,
   Grid,
   IconButton,
@@ -13,14 +12,14 @@ import {
 import LinkIcon from "@material-ui/icons/Link"
 import TwitterIcon from "@material-ui/icons/Twitter"
 import LocalOfferIcon from "@material-ui/icons/LocalOffer"
-import WatchLaterIcon from "@material-ui/icons/WatchLater"
 
 import React from "react"
 import Layout from "../components/layout/blog"
 import SEO from "../components/seo"
 import theme from "../styles/theme"
 import { graphql, PageProps } from "gatsby"
-import { format, parseISO } from "date-fns"
+import Tag from "../components/tag"
+import PostTime from "../components/postTime"
 
 export const query = graphql`
   query BlogPages {
@@ -35,32 +34,11 @@ export const query = graphql`
         }
         title
         publishedAt
+        updatedAt
       }
     }
   }
 `
-
-const Tag: React.FC<{
-  props:
-    | GatsbyTypes.Maybe<Pick<GatsbyTypes.MicrocmsBlogsTags, "title" | "slug">>
-    | undefined
-}> = ({ props }) => {
-  let contents = <></>
-  const classes = useStyles()
-  if (props !== undefined) {
-    if (props.slug !== undefined && props.title !== undefined)
-      contents = (
-        <Chip
-          label={props.title}
-          variant="outlined"
-          size="small"
-          key={props.slug}
-          className={classes.chip}
-        />
-      )
-  }
-  return contents
-}
 
 const useStyles = makeStyles({
   container: {
@@ -71,7 +49,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
-  timeIcon: {
+  tagIcon: {
     marginRight: theme.spacing(0.5),
     fontSize: "1rem",
   },
@@ -85,7 +63,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
     paddingBottom: 0,
   },
-  cardActions: {},
   chip: {
     margin: theme.spacing(0.5),
   },
@@ -108,12 +85,10 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
             alignItems="center"
             fontSize="small"
           >
-            <WatchLaterIcon className={classes.timeIcon} />
-            <time dateTime={step.publishedAt}>
-              {step.publishedAt !== undefined
-                ? format(parseISO(step.publishedAt), "yyyy/MM/dd")
-                : "NO DATA"}
-            </time>
+            <PostTime
+              updatedAt={step.updatedAt}
+              publishedAt={step.publishedAt}
+            />
           </Box>
           <Typography className={classes.cardTitle} component="h2">
             {step.title}
@@ -126,7 +101,7 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
             marginTop={1}
             marginBottom={1}
           >
-            <LocalOfferIcon className={classes.timeIcon} />
+            <LocalOfferIcon className={classes.tagIcon} />
             タグ
           </Box>
           <Box>
@@ -137,7 +112,7 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
             )}
           </Box>
         </CardContent>
-        <CardActions className={classes.cardActions}>
+        <CardActions>
           <IconButton aria-label="twitter" className={classes.iconButton}>
             <TwitterIcon />
           </IconButton>
