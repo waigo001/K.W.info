@@ -32,6 +32,9 @@ const useStyles = makeStyles({
   spacer: {
     margin: theme.spacing(1),
   },
+  appBar: {
+    marginBottom: theme.spacing(1),
+  },
   bottomAppbar: {
     width: "100%",
     position: "fixed",
@@ -172,7 +175,7 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
         </List>
       </Drawer>
       <main>
-        <Toolbar />
+        <Toolbar className={classes.appBar} />
         {children}
         <Toolbar variant="dense" />
       </main>
