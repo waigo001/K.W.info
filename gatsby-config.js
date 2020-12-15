@@ -4,6 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
+    siteUrl: process.env.BASE_URL,
     title: "K.W.info",
     description: "K.W.の日常ブログです。",
     author: "K.W.",

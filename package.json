@@ -7,6 +7,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@types/react-copy-to-clipboard": "^5.0.0",
     "@types/react-helmet": "^6.1.0",
     "@types/unist": "^2.0.3",
     "date-fns": "^2.16.1",
@@ -28,6 +29,7 @@
     "gatsby-transformer-sharp": "^2.8.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "react-swipeable-views": "^0.13.9",
