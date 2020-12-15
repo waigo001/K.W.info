@@ -19,6 +19,7 @@ interface Prop {
   lang?: string
   meta?: MetaObject[]
   title?: string
+  titleTemplate?: string
 }
 
 const SEO: React.FC<Prop> = ({
@@ -26,6 +27,7 @@ const SEO: React.FC<Prop> = ({
   lang = "ja",
   meta = [],
   title = "",
+  titleTemplate = "",
 }) => {
   const { site } = useStaticQuery(
     graphql`
@@ -50,7 +52,7 @@ const SEO: React.FC<Prop> = ({
         lang,
       }}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
+      titleTemplate={titleTemplate ? titleTemplate : `%s - ${defaultTitle}`}
       meta={[
         {
           name: `description`,
