@@ -17,7 +17,7 @@ import React from "react"
 import Layout from "../components/layout/blog"
 import SEO from "../components/seo"
 import theme from "../styles/theme"
-import { graphql, PageProps } from "gatsby"
+import { graphql, Link, PageProps } from "gatsby"
 import Tag from "../components/tag"
 import PostTime from "../components/postTime"
 
@@ -55,6 +55,7 @@ const useStyles = makeStyles({
   },
   cardTitle: {
     margin: theme.spacing(0.5),
+    textDecoration: "none",
     fontSize: "1.5rem",
     color: theme.palette.text.primary,
     fontWeight: 700,
@@ -90,7 +91,11 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
               publishedAt={step.publishedAt}
             />
           </Box>
-          <Typography className={classes.cardTitle} component="h2">
+          <Typography
+            className={classes.cardTitle}
+            component={Link}
+            to={`/blog/${step.slug}`}
+          >
             {step.title}
           </Typography>
           <Box
@@ -106,7 +111,7 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
           </Box>
           <Box>
             {step.tags !== undefined ? (
-              step.tags.map(key => <Tag props={key} />)
+              step.tags.map(key => <Tag props={key} key={key?.title} />)
             ) : (
               <></>
             )}
