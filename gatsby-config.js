@@ -29,7 +29,7 @@ module.exports = {
         background_color: "#918a99",
         theme_color: "#918a99",
         display: "minimal-ui",
-        icon: "src/images/favicon.png",
+        icon: "src/images/favicon.jpg",
       },
     },
     "gatsby-plugin-material-ui",
@@ -64,6 +64,10 @@ module.exports = {
     "gatsby-plugin-typescript",
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // "gatsby-plugin-offline",
+    "gatsby-plugin-offline",
+    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-robots-txt",
+    },
   ],
 }
