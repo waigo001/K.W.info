@@ -37,6 +37,7 @@ const SEO: React.FC<Prop> = ({
             title
             description
             author
+            twitter
           }
         }
       }
@@ -76,7 +77,7 @@ const SEO: React.FC<Prop> = ({
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
+          content: site.siteMetadata?.twitter || ``,
         },
         {
           name: `twitter:title`,
@@ -85,6 +86,10 @@ const SEO: React.FC<Prop> = ({
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: "twitter:site",
+          content: site.siteMetadata?.twitter || "",
         },
       ].concat(meta)}
     />

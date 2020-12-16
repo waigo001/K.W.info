@@ -8,6 +8,7 @@ module.exports = {
     title: "K.W.info",
     description: "K.W.の日常ブログです。",
     author: "K.W.",
+    twitter: "@waigo001",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
