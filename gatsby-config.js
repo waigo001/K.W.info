@@ -44,6 +44,10 @@ module.exports = {
             endpoint: "blogs",
             format: "list",
           },
+          {
+            endpoint: "about",
+            format: "list",
+          },
         ],
       },
     },
