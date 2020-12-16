@@ -44,7 +44,7 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
 
   return (
     <Layout>
-      <SEO title="Blog" />
+      <SEO title="Blog" description="日常的なブログの一覧" />
       <Container maxWidth="md" className={classes.container}>
         <Grid container spacing={2}>
           {data.allMicrocmsBlogs.nodes.map(step => (

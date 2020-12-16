@@ -4,12 +4,7 @@ import SEO from "../components/seo"
 
 import TodayIcon from "@material-ui/icons/Today"
 import InfoIcon from "@material-ui/icons/Info"
-import {
-  Button,
-  Container,
-  Grid,
-  makeStyles,
-} from "@material-ui/core"
+import { Button, Container, Grid, makeStyles } from "@material-ui/core"
 
 import Carousel from "../components/carousel"
 import { Link } from "gatsby"
@@ -28,7 +23,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Home" titleTemplate="K.W.info" />
 
       <Grid container justify="center">
         <Grid item>

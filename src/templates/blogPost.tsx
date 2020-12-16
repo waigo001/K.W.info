@@ -55,7 +55,10 @@ const BlogPost: React.FC<PageProps<GatsbyTypes.BlogPostQuery>> = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={data.microcmsBlogs?.title} />
+      <SEO
+        title={data.microcmsBlogs?.title}
+        description={data.microcmsBlogs?.description}
+      />
       <Container maxWidth="lg">
         <Grid container justify="center">
           <Grid item xs={12} sm={8}>

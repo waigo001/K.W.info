@@ -8,6 +8,7 @@ module.exports = {
     title: "K.W.info",
     description: "K.W.の日常ブログです。",
     author: "K.W.",
+    twitter: "@waigo001",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -26,10 +27,10 @@ module.exports = {
         name: "K.W.info",
         short_name: "K.W.info",
         start_url: "/",
-        background_color: "#663399",
-        theme_color: "#663399",
+        background_color: "#918a99",
+        theme_color: "#918a99",
         display: "minimal-ui",
-        icon: "src/images/gatsby-icon.png",
+        icon: "src/images/favicon.jpg",
       },
     },
     "gatsby-plugin-material-ui",
@@ -64,6 +65,10 @@ module.exports = {
     "gatsby-plugin-typescript",
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // "gatsby-plugin-offline",
+    "gatsby-plugin-offline",
+    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-robots-txt",
+    },
   ],
 }
