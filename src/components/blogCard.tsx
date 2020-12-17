@@ -89,6 +89,7 @@ const BlogCard: React.FC<{
           className={classes.cardTitle}
           component={Link}
           to={`/blog/${step.slug}`}
+          
         >
           {step.title}
         </Typography>

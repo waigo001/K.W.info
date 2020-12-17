@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import React from "react"
 import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     fontWeight: 700,
     color: theme.palette.text.secondary,
     margin: theme.spacing(2),
+    textDecoration: "none",
   },
   subTitle: {
     fontWeight: 700,
@@ -122,15 +123,17 @@ const Carousel: React.FC = () => {
                 ? format(parseISO(step.publishedAt), "yyyy/MM/dd")
                 : ""}
             </Typography>
-            <Typography className={classes.title} align="center">
-              {step.title}
+            <Typography align="center">
+              <Link className={classes.title} to={`/blog/${step.slug}`}>
+                {step.title}
+              </Link>
             </Typography>
             <Typography className={classes.subTitle} align="center">
               tags
             </Typography>
             <Typography className={classes.subTitle} align="center">
               {step.tags !== undefined ? (
-                step.tags.map(key => <Tag props={key} />)
+                step.tags.map(key => <Tag props={key} key={key?.slug} />)
               ) : (
                 <></>
               )}
