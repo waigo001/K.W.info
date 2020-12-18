@@ -10,18 +10,25 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 interface MetaObject {
-  name: string;
-  content: string;
+  name: string
+  content: string
 }
 
 interface Prop {
-  description?: string;
-  lang?: string;
-  meta?: MetaObject[];
-  title: string;
+  description?: string
+  lang?: string
+  meta?: MetaObject[]
+  title?: string
+  titleTemplate?: string
 }
 
-const SEO:React.FC<Prop>=({ description='', lang='ja', meta=[], title })=> {
+const SEO: React.FC<Prop> = ({
+  description = "",
+  lang = "ja",
+  meta = [],
+  title = "",
+  titleTemplate = "",
+}) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -30,6 +37,7 @@ const SEO:React.FC<Prop>=({ description='', lang='ja', meta=[], title })=> {
             title
             description
             author
+            twitter
           }
         }
       }
@@ -45,7 +53,7 @@ const SEO:React.FC<Prop>=({ description='', lang='ja', meta=[], title })=> {
         lang,
       }}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      titleTemplate={titleTemplate ? titleTemplate : `%s - ${defaultTitle}`}
       meta={[
         {
           name: `description`,
@@ -69,7 +77,7 @@ const SEO:React.FC<Prop>=({ description='', lang='ja', meta=[], title })=> {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
+          content: site.siteMetadata?.twitter || ``,
         },
         {
           name: `twitter:title`,
@@ -79,10 +87,13 @@ const SEO:React.FC<Prop>=({ description='', lang='ja', meta=[], title })=> {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: "twitter:site",
+          content: site.siteMetadata?.twitter || "",
+        },
       ].concat(meta)}
     />
   )
 }
-
 
 export default SEO
