@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v2.1.4
         with:
           node-version: "12.x"
-      - run: npm install
+      - run: npm ci
       - run: npm run build
         env:
           BASE_URL: ${{secrets.BASE_URL}}
@@ -25,4 +25,3 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=public --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
