@@ -3,7 +3,7 @@ name: Gatsby deploy(from microCMS Actions)
 on:
   repository_dispatch:
     types: [update_post]
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,12 +26,13 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Build
-        run: npm ci
-        run: npm run build
-        - env:
-            BASE_URL: ${{secrets.BASE_URL}}
-            MICROCMS_API_KEY: ${{secrets.MICROCMS_API_KEY}}
-            MICROCMS_ENDPOINT: ${{secrets.MICROCMS_ENDPOINT}}
+        run: |
+          npm ci
+          npm run build
+        env:
+          BASE_URL: ${{secrets.BASE_URL}}
+          MICROCMS_API_KEY: ${{secrets.MICROCMS_API_KEY}}
+          MICROCMS_ENDPOINT: ${{secrets.MICROCMS_ENDPOINT}}
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
