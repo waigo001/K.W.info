@@ -1,9 +1,9 @@
-name: Gatsby deploy
+name: Gatsby deploy(from microCMS Actions)
 
 on:
-  push:
-    branches: [master]
-
+  repository_dispatch:
+    types: [update_post]
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
