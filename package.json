@@ -46,7 +46,7 @@
     "@types/react-swipeable-views": "^0.13.0",
     "@types/react-swipeable-views-utils": "^0.13.2",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.18",
-    "prettier": "2.1.2",
+    "prettier": "2.2.1",
     "ts-graphql-plugin": "^2.1.1"
   },
   "keywords": [
