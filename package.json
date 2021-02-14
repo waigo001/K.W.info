@@ -12,7 +12,7 @@
     "@types/unist": "^2.0.3",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
-    "fontsource-josefin-sans": "^3.0.5",
+    "fontsource-josefin-sans": "^4.0.0",
     "fontsource-noto-sans-jp": "^4.0.0",
     "fontsource-roboto": "^3.1.5",
 
