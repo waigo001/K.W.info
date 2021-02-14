@@ -12,7 +12,7 @@
     "@types/unist": "^2.0.3",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
-    "fontsource-josefin-sans": "^3.0.5",
+    "fontsource-josefin-sans": "^4.0.0",
     "fontsource-noto-sans-jp": "^4.0.0",
     "fontsource-roboto": "^3.1.5",
 
@@ -29,7 +29,7 @@
     "gatsby-plugin-typegen": "^2.2.2",
     "gatsby-source-filesystem": "^2.8.0",
     "gatsby-source-microcms": "^1.0.1",
-    "gatsby-transformer-sharp": "^2.9.0",
+    "gatsby-transformer-sharp": "^2.12.0",
     "install": "^0.13.0",
     "npm": "^6.14.10",
     "prop-types": "^15.7.2",
