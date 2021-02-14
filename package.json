@@ -29,7 +29,7 @@
     "gatsby-plugin-typegen": "^2.2.2",
     "gatsby-source-filesystem": "^2.8.0",
     "gatsby-source-microcms": "^1.0.1",
-    "gatsby-transformer-sharp": "^2.9.0",
+    "gatsby-transformer-sharp": "^2.12.0",
     "install": "^0.13.0",
     "npm": "^6.14.10",
     "prop-types": "^15.7.2",
