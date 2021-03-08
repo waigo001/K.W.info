@@ -25,7 +25,7 @@
     "gatsby-plugin-sharp": "^2.14.3",
     "gatsby-plugin-sitemap": "^2.9.0",
     "gatsby-plugin-twitter": "^2.10.0",
-    "gatsby-plugin-typegen": "^2.2.2",
+    "gatsby-plugin-typegen": "^2.2.4",
     "gatsby-source-filesystem": "^2.11.1",
     "gatsby-source-microcms": "^1.0.1",
     "gatsby-transformer-sharp": "^2.12.0",
