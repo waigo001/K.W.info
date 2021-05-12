@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   root: {
     fontFamily: "Josefin Sans",
     fontWeight: 700,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     textDecoration: "none",
     boxShadow: "none",
     textAlign: "center",

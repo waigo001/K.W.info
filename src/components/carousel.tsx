@@ -24,14 +24,13 @@ const useStyles = makeStyles({
   title: {
     fontSize: "3rem",
     fontWeight: 700,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     margin: theme.spacing(2),
     textDecoration: "none",
   },
   subTitle: {
     fontWeight: 700,
     fontSize: "0.8rem",
-    color: theme.palette.text.secondary,
     letterSpacing: 2,
     margin: theme.spacing(1),
   },
@@ -41,7 +40,7 @@ const useStyles = makeStyles({
     margin: "0 6px",
   },
   dotActive: {
-    backgroundColor: "#626262",
+    backgroundColor: theme.palette.text.primary,
   },
   tag: {
     margin: theme.spacing(1),

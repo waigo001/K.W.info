@@ -1,5 +1,5 @@
 import {
-  createStyles,
+  Button,
   CssBaseline,
   Grid,
   IconButton,
@@ -8,29 +8,39 @@ import {
   Typography,
 } from "@material-ui/core"
 import { GitHub, Instagram, Twitter } from "@material-ui/icons"
-import PropTypes from "prop-types"
 import React, { ReactNode } from "react"
 import theme from "../../styles/theme"
 import Title from "../title"
+import { Link } from "gatsby"
+
+import TodayIcon from "@material-ui/icons/Today"
+import InfoIcon from "@material-ui/icons/Info"
+
+type Props = {
+  children: ReactNode
+}
 
 const useStyles = makeStyles({
   title: {
     margin: theme.spacing(3),
   },
+  button: {
+    margin: theme.spacing(2),
+    fontWeight: 700,
+  },
   linkButton: {
+    color: theme.palette.text.primary,
     margin: theme.spacing(1),
-    color: theme.palette.text.secondary,
   },
   bottomText: {
     margin: theme.spacing(3),
     fontSize: "0.75rem",
     fontWeight: 700,
-    color: theme.palette.text.secondary,
     letterSpacing: "2px",
   },
 })
 
-const indexPage: React.FC<ReactNode> = ({ children }) => {
+const indexPage: React.VFC<Props> = ({ children }) => {
   const classes = useStyles()
 
   return (
@@ -45,8 +55,36 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
         >
           <Title />
         </Typography>
+        <nav>
+          <Grid container justify="center">
+            <Grid item>
+              <Button
+                className={classes.button}
+                size="large"
+                startIcon={<TodayIcon />}
+                component={Link}
+                to="/blog"
+              >
+                Blog
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                className={classes.button}
+                size="large"
+                startIcon={<InfoIcon />}
+                component={Link}
+                to="/about"
+              >
+                About
+              </Button>
+            </Grid>
+          </Grid>
+        </nav>
       </header>
+
       <main>{children}</main>
+
       <footer>
         <Grid container justify="center">
           <Grid item>
@@ -75,7 +113,7 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
             <IconButton
               aria-label="Instagram"
               className={classes.linkButton}
-              href="https://www.instagram.com/waigo001/"
+              href="https://www.instagram.com/waigo001"
               target="_blank"
               rel="noreferrer"
             >
@@ -92,9 +130,6 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
       </footer>
     </ThemeProvider>
   )
-}
-indexPage.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default indexPage

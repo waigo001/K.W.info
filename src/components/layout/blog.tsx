@@ -49,24 +49,28 @@ const useStyles = makeStyles({
   bottomText: {
     fontSize: "0.75rem",
     fontWeight: 700,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     letterSpacing: "2px",
     flexGrow: 1,
   },
   button: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     fontWeight: 700,
   },
   iconButton: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
   },
   list: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     width: 250,
   },
+  listItemIcon: {
+    color: theme.palette.text.primary,
+  },
   listItemText: {
+    color: theme.palette.text.primary,
     fontWeight: 700,
   },
 })
@@ -85,7 +89,9 @@ function ListItemLink(props: ListItemLinkProps) {
   return (
     <li>
       <ListItem button component={Link} to={to} onClick={onClick}>
-        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        {icon ? (
+          <ListItemIcon className={classes.listItemIcon}>{icon}</ListItemIcon>
+        ) : null}
         <ListItemText
           classes={{ primary: classes.listItemText }}
           primary={primary}
@@ -194,6 +200,7 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
               href="https://github.com/waigo001"
               target="_blank"
               rel="noreferrer"
+              className={classes.iconButton}
             >
               <GitHub />
             </IconButton>
@@ -203,6 +210,7 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
               href="https://twitter.com/waigo001"
               target="_blank"
               rel="noreferrer"
+              className={classes.iconButton}
             >
               <Twitter />
             </IconButton>
@@ -212,6 +220,7 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
               href="https://www.instagram.com/waigo001/"
               target="_blank"
               rel="noreferrer"
+              className={classes.iconButton}
             >
               <Instagram />
             </IconButton>
