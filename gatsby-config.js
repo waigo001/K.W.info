@@ -33,7 +33,6 @@ module.exports = {
         icon: "src/images/favicon.jpg",
       },
     },
-    "gatsby-plugin-material-ui",
     {
       resolve: "gatsby-source-microcms",
       options: {
