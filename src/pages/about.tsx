@@ -1,6 +1,5 @@
 import { graphql, PageProps } from "gatsby"
 import React from "react"
-import Image from "../components/image"
 import Layout from "../components/layout/blog"
 import PostRenderer from "../components/postRenderer"
 import SEO from "../components/seo"

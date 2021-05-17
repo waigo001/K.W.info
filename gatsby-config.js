@@ -73,5 +73,11 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
     },
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
+      options: {
+        resetCSS: true,
+      },
+    },
   ],
 }

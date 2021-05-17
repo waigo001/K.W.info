@@ -1,6 +1,5 @@
 import { Link } from "gatsby"
 
-import PropTypes from "prop-types"
 import React, { ReactNode } from "react"
 import Title from "../title"
 
@@ -27,18 +26,17 @@ function ListItemLink(props: ListItemLinkProps) {
 const indexPage: React.FC<ReactNode> = ({ children }) => {
   const [state, setState] = React.useState(false)
 
-  const toggleDrawer = (open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    if (
-      event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" ||
-        (event as React.KeyboardEvent).key === "Shift")
-    ) {
-      return
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return
+      }
+      setState(open)
     }
-    setState(open)
-  }
 
   return (
     <>
@@ -92,10 +90,6 @@ const indexPage: React.FC<ReactNode> = ({ children }) => {
       </footer>
     </>
   )
-}
-
-indexPage.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default indexPage
