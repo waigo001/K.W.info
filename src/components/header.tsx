@@ -19,20 +19,28 @@ const HeaderContent = () => {
       <Flex
         w="100%"
         h="100%"
-        px="6"
+        px="8"
         align="center"
         justify="space-between"
         gridGap={4}
       >
         <Title fontSize="3xl" />
-        <Spacer />
+        <Spacer display={{ base: "none", md: "flex" }} />
         <Link to="/blog">
-          <Button leftIcon={<FaCalendarDay />} variant="ghost">
+          <Button
+            leftIcon={<FaCalendarDay />}
+            variant="ghost"
+            display={{ base: "none", md: "flex" }}
+          >
             Blog
           </Button>
         </Link>
         <Link to="/about">
-          <Button variant="ghost" leftIcon={<FaInfoCircle />}>
+          <Button
+            variant="ghost"
+            leftIcon={<FaInfoCircle />}
+            display={{ base: "none", md: "flex" }}
+          >
             About
           </Button>
         </Link>
@@ -54,11 +62,11 @@ const Header = (props: HTMLChakraProps<"header">) => {
       top="0"
       left="0"
       right="0"
-      shadow="lg"
+      shadow="md"
       bg={bg}
       {...props}
     >
-      <chakra.div height="4rem" mx="auto" maxW="8xl">
+      <chakra.div height="4em" mx="auto" maxW="8xl">
         <HeaderContent />
       </chakra.div>
     </chakra.header>

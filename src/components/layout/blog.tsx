@@ -1,6 +1,8 @@
-import { Container } from "@chakra-ui/layout"
+import { Container, Flex } from "@chakra-ui/layout"
+import { chakra, Grid, VStack } from "@chakra-ui/react"
 
 import React, { ReactNode } from "react"
+import { use100vh } from "react-div-100vh"
 import Footer from "../footer"
 import Header from "../header"
 
@@ -9,16 +11,18 @@ type Props = {
 }
 
 const indexPage: React.VFC<Props> = ({ children }: Props) => {
+  const height = use100vh()
+
   return (
-    <>
+    <VStack minH={height ? height : "100vh"}>
       <Header />
 
-      <main>
-        <Container maxW="xl">{children}</Container>
-      </main>
+      <Container as="main" maxW="4xl" flex="1">
+        {children}
+      </Container>
 
       <Footer />
-    </>
+    </VStack>
   )
 }
 
