@@ -4,6 +4,7 @@ import React from "react"
 
 const TitleItem = chakra(Link, {
   baseStyle: {
+    mt: 1.5,
     fontFamily: "Josefin Sans",
   },
 })
@@ -11,7 +12,7 @@ const TitleItem = chakra(Link, {
 const Title = (props: HTMLChakraProps<ChakraComponent<typeof Link, {}>>) => {
   return (
     <TitleItem to="/" {...props}>
-      K.W. info
+      K.W.&nbsp;info
     </TitleItem>
   )
 }

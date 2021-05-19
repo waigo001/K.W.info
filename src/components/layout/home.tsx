@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 import { Flex, VStack } from "@chakra-ui/react"
 import { Button, IconButton } from "@chakra-ui/button"
@@ -15,14 +15,17 @@ import {
 import { Link as GatsbyLink } from "gatsby"
 
 import Title from "../title"
+import { use100vh } from "react-div-100vh"
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const indexPage: React.VFC<Props> = ({ children }) => {
+  const height = use100vh()
+
   return (
-    <VStack spacing={8}>
+    <VStack spacing={8} minH={height ? height : "100vh"} justify="center">
       <header>
         <Heading as="h1" size="3xl" m={6}>
           <Title />
@@ -80,7 +83,7 @@ const indexPage: React.VFC<Props> = ({ children }) => {
           letterSpacing="1.5px"
           fontWeight="700"
           align="center"
-          m={6}
+          m={8}
         >
           Copyright &copy; 2020 <Title />
         </Text>
@@ -89,7 +92,7 @@ const indexPage: React.VFC<Props> = ({ children }) => {
           letterSpacing="1.5px"
           fontWeight="700"
           align="center"
-          m={6}
+          m={8}
         >
           All rights reserved.
         </Text>
