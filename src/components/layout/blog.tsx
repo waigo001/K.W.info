@@ -1,5 +1,5 @@
-import { Container, Flex } from "@chakra-ui/layout"
-import { chakra, Grid, VStack } from "@chakra-ui/react"
+import { Container } from "@chakra-ui/layout"
+import { VStack } from "@chakra-ui/react"
 
 import React, { ReactNode } from "react"
 import { use100vh } from "react-div-100vh"

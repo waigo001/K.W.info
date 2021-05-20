@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react"
 
 import { Flex, VStack } from "@chakra-ui/react"
-import { Button, IconButton } from "@chakra-ui/button"
-import { Link as OtherLink, Heading } from "@chakra-ui/layout"
+import { Button } from "@chakra-ui/button"
+import { Heading } from "@chakra-ui/layout"
 import { Text } from "@chakra-ui/react"
 
 import {
@@ -12,10 +12,11 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa"
-import { Link as GatsbyLink } from "gatsby"
+import { Link } from "gatsby"
 
 import Title from "../title"
 import { use100vh } from "react-div-100vh"
+import IconLink from "../iconLink"
 
 type Props = {
   children: ReactNode
@@ -33,50 +34,47 @@ const indexPage: React.VFC<Props> = ({ children }) => {
       </header>
       <nav>
         <Flex justify="center" gridGap={4}>
-          <GatsbyLink to="/blog">
+          <Link to="/blog">
             <Button leftIcon={<FaCalendarDay />} variant="ghost">
               Blog
             </Button>
-          </GatsbyLink>
-          <GatsbyLink to="/about">
+          </Link>
+          <Link to="/about">
             <Button variant="ghost" leftIcon={<FaInfoCircle />}>
               About
             </Button>
-          </GatsbyLink>
+          </Link>
         </Flex>
       </nav>
       <main>{children}</main>
       <footer>
         <Flex justify="center" gridGap={4}>
-          <OtherLink href="https://github.com/waigo001" isExternal>
-            <IconButton
-              aria-label="Github"
-              isRound
-              size="lg"
-              variant="ghost"
-              icon={<FaGithub size="1.5em" />}
-            />
-          </OtherLink>
+          <IconLink
+            href="https://github.com/waigo001"
+            aria-label="Github"
+            isRound
+            size="lg"
+            variant="ghost"
+            icon={<FaGithub size="1.5em" />}
+          />
 
-          <OtherLink href="https://twitter.com/waigo001" isExternal>
-            <IconButton
-              aria-label="Twitter"
-              isRound
-              size="lg"
-              variant="ghost"
-              icon={<FaTwitter size="1.5em" />}
-            />
-          </OtherLink>
+          <IconLink
+            href="https://twitter.com/waigo001"
+            aria-label="Twitter"
+            isRound
+            size="lg"
+            variant="ghost"
+            icon={<FaTwitter size="1.5em" />}
+          />
 
-          <OtherLink href="https://www.instagram.com/waigo001/" isExternal>
-            <IconButton
-              aria-label="Instagram"
-              isRound
-              size="lg"
-              variant="ghost"
-              icon={<FaInstagram size="1.5em" />}
-            />
-          </OtherLink>
+          <IconLink
+            href="https://www.instagram.com/waigo001/"
+            aria-label="Instagram"
+            isRound
+            size="lg"
+            variant="ghost"
+            icon={<FaInstagram size="1.5em" />}
+          />
         </Flex>
         <Text
           fontSize="xs"
