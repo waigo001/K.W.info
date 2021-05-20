@@ -69,18 +69,16 @@ const FooterContent = () => {
 }
 
 const Footer = (props: HTMLChakraProps<"footer">) => {
-  const ref = React.useRef<HTMLHeadingElement>(null)
   const bg = useColorModeValue("white", "gray.800")
   return (
     <chakra.footer
       pos="sticky"
       transition="box-shadow 0.2s, background-color 0.2s"
-      ref={ref}
       width="full"
       top="auto"
       bottom="0"
-      shadow="dark-lg"
       bg={bg}
+      shadow="dark-lg"
       {...props}
     >
       <chakra.div height="3em" mx="auto" maxW="8xl">

@@ -3,47 +3,131 @@ import React from "react"
 import {
   Button,
   chakra,
+  Divider,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
+  IconButton,
+  ListItem,
   Spacer,
+  UnorderedList,
+  useBreakpointValue,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { HTMLChakraProps } from "@chakra-ui/system"
 import { Link } from "gatsby"
-import { FaCalendarDay, FaInfoCircle } from "react-icons/fa"
+import { FaBars, FaCalendarDay, FaInfoCircle } from "react-icons/fa"
+import { useMatch } from "@reach/router"
 
 import Title from "./title"
 
 const HeaderContent = () => {
+  const mobileNav = useDisclosure()
+
+  const padding = useBreakpointValue({ base: "3", md: "6" })
   return (
     <>
       <Flex
         w="100%"
         h="100%"
-        px="8"
+        px={padding}
         align="center"
         justify="space-between"
-        gridGap={4}
+        gridGap={3}
       >
+        <IconButton
+          display={{ base: "flex", md: "none" }}
+          aria-label="nav-drawer-open"
+          variant="ghost"
+          isRound
+          onClick={mobileNav.onOpen}
+          icon={<FaBars />}
+        />
+
+        <Drawer
+          isOpen={mobileNav.isOpen}
+          placement="top"
+          onClose={mobileNav.onClose}
+          trapFocus={false}
+        >
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader>
+              <Title />
+            </DrawerHeader>
+
+            <DrawerBody>
+              <nav>
+                <UnorderedList spacing="0.25rem" listStyleType="none">
+                  <Divider />
+                  <ListItem>
+                    <Link to="/blog">
+                      <Button
+                        leftIcon={<FaCalendarDay />}
+                        variant="ghost"
+                        w="100%"
+                        rounded="full"
+                        colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
+                        justifyContent="left"
+                        onClick={mobileNav.onClose}
+                      >
+                        Blog
+                      </Button>
+                    </Link>
+                  </ListItem>
+                  <Divider />
+                  <ListItem>
+                    <Link to="/about">
+                      <Button
+                        variant="ghost"
+                        leftIcon={<FaInfoCircle />}
+                        w="100%"
+                        rounded="full"
+                        colorScheme={
+                          useMatch("/about" + "/*") ? "cyan" : "gray"
+                        }
+                        justifyContent="left"
+                        onClick={mobileNav.onClose}
+                      >
+                        About
+                      </Button>
+                    </Link>
+                  </ListItem>
+                </UnorderedList>
+              </nav>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+
         <Title fontSize="3xl" />
-        <Spacer display={{ base: "none", md: "flex" }} />
-        <Link to="/blog">
-          <Button
-            leftIcon={<FaCalendarDay />}
-            variant="ghost"
-            display={{ base: "none", md: "flex" }}
-          >
-            Blog
-          </Button>
-        </Link>
-        <Link to="/about">
-          <Button
-            variant="ghost"
-            leftIcon={<FaInfoCircle />}
-            display={{ base: "none", md: "flex" }}
-          >
-            About
-          </Button>
-        </Link>
+
+        <Spacer />
+        <Flex display={{ base: "none", md: "flex" }} align="center">
+          <Link to="/blog">
+            <Button
+              leftIcon={<FaCalendarDay />}
+              colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
+              variant="ghost"
+              display={{ base: "none", md: "flex" }}
+            >
+              Blog
+            </Button>
+          </Link>
+          <Link to="/about">
+            <Button
+              leftIcon={<FaInfoCircle />}
+              colorScheme={useMatch("/about" + "/*") ? "cyan" : "gray"}
+              variant="ghost"
+              display={{ base: "none", md: "flex" }}
+            >
+              About
+            </Button>
+          </Link>
+        </Flex>
       </Flex>
     </>
   )
