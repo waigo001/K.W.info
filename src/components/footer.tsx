@@ -5,23 +5,65 @@ import {
   HTMLChakraProps,
   useColorModeValue,
   Text,
+  Spacer,
+  useBreakpointValue,
+  Box,
 } from "@chakra-ui/react"
 import Title from "./title"
+import IconLink from "./iconLink"
+import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const FooterContent = () => {
+  const padding = useBreakpointValue({ base: "4", md: "6" })
+
   return (
     <Flex
       w="100%"
       h="100%"
-      px="8"
+      px={padding}
       align="center"
       justify="space-between"
       gridGap={4}
     >
       <Text fontSize="xs" letterSpacing="1.5px" fontWeight="700" align="center">
-        Copyright &copy; 2021 <Title />
-        &nbsp;&nbsp;All rights reserved.
+        <Box as="span" display={{ base: "none", sm: "inline" }}>
+          Copyright&nbsp;
+        </Box>
+        &copy; 2021&nbsp;
+        <Title />
+        <Box as="span" display={{ base: "none", md: "inline" }}>
+          &nbsp;&nbsp;All rights reserved.
+        </Box>
       </Text>
+      <Spacer />
+      <Flex gridGap={4}>
+        <IconLink
+          href="https://github.com/waigo001"
+          aria-label="Github"
+          isRound
+          size="md"
+          variant="ghost"
+          icon={<FaGithub size="1.5em" />}
+        />
+
+        <IconLink
+          href="https://twitter.com/waigo001"
+          aria-label="Twitter"
+          isRound
+          size="md"
+          variant="ghost"
+          icon={<FaTwitter size="1.5em" />}
+        />
+
+        <IconLink
+          href="https://www.instagram.com/waigo001/"
+          aria-label="Instagram"
+          isRound
+          size="md"
+          variant="ghost"
+          icon={<FaInstagram size="1.5em" />}
+        />
+      </Flex>
     </Flex>
   )
 }
