@@ -33,7 +33,6 @@ module.exports = {
         icon: "src/images/favicon.jpg",
       },
     },
-    "gatsby-plugin-material-ui",
     {
       resolve: "gatsby-source-microcms",
       options: {
@@ -52,12 +51,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
-      options: {
-        devMode: true,
-      },
-    },
-    {
       resolve: "gatsby-plugin-typegen",
       options: {
         emitSchema: {
@@ -73,6 +66,12 @@ module.exports = {
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-robots-txt",
+    },
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
+      options: {
+        resetCSS: true,
+      },
     },
   ],
 }

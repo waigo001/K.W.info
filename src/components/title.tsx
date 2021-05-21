@@ -1,27 +1,19 @@
+import { Link } from "gatsby"
+import { chakra, ChakraComponent, HTMLChakraProps } from "@chakra-ui/react"
 import React from "react"
 
-import { makeStyles } from "@material-ui/core"
-import { Link } from "gatsby"
-import theme from "../styles/theme"
-
-const useStyles = makeStyles({
-  root: {
+const TitleItem = chakra(Link, {
+  baseStyle: {
+    mt: 1.5,
     fontFamily: "Josefin Sans",
-    fontWeight: 700,
-    color: theme.palette.text.secondary,
-    textDecoration: "none",
-    boxShadow: "none",
-    textAlign: "center",
   },
 })
 
-const Title = () => {
-  const classes = useStyles()
-
+const Title = (props: HTMLChakraProps<ChakraComponent<typeof Link, {}>>) => {
   return (
-    <Link to="/" className={classes.root}>
-      K.W. info
-    </Link>
+    <TitleItem to="/" {...props}>
+      K.W.&nbsp;info
+    </TitleItem>
   )
 }
 

@@ -1,12 +1,5 @@
-import { Chip, makeStyles } from "@material-ui/core"
 import React from "react"
-import theme from "../styles/theme"
-
-const useStyles = makeStyles({
-  chip: {
-    margin: theme.spacing(0.5),
-  },
-})
+import { Tag as ChakraTag, TagLabel } from "@chakra-ui/react"
 
 const Tag: React.FC<{
   props:
@@ -14,17 +7,12 @@ const Tag: React.FC<{
     | undefined
 }> = ({ props }) => {
   let contents = <></>
-  const classes = useStyles()
   if (props !== undefined) {
     if (props.slug !== undefined && props.title !== undefined)
       contents = (
-        <Chip
-          label={props.title}
-          variant="outlined"
-          size="small"
-          key={props.slug}
-          className={classes.chip}
-        />
+        <ChakraTag key={props.slug} borderRadius="full" variant="outline">
+          <TagLabel> {props.title}</TagLabel>
+        </ChakraTag>
       )
   }
   return contents
