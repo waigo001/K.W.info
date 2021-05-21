@@ -16,7 +16,9 @@ import {
   OrderedList,
   Link,
   Icon,
-  Flex,
+  Divider,
+  useColorModeValue,
+  Box,
 } from "@chakra-ui/react"
 import { FaExternalLinkAlt } from "react-icons/fa"
 
@@ -27,37 +29,126 @@ const processor = unified()
   .use(rehypeReact, {
     createElement: React.createElement,
     components: {
-      h1: (props: TypographyProps) => {
-        return <Heading as="h1" size="xl" {...props} my="4" />
+      h1: ({ children, ...props }: any) => {
+        return (
+          <>
+            <Heading
+              as="h1"
+              size="2xl"
+              fontWeight="600"
+              {...props}
+              mt="6"
+              mb="1"
+            >
+              {children}
+            </Heading>
+            <Divider mt="1" mb="4" />
+          </>
+        )
       },
-      h2: (props: TypographyProps) => {
-        return <Heading as="h2" size="md" {...props} my="4" />
+      h2: ({ children, ...props }: any) => {
+        return (
+          <>
+            <Heading
+              as="h2"
+              fontSize="1.5em"
+              fontWeight="600"
+              {...props}
+              mt="6"
+              mb="1"
+            >
+              {children}
+            </Heading>
+            <Divider mt="1" mb="4" />
+          </>
+        )
       },
       h3: (props: TypographyProps) => {
-        return <Heading as="h3" size="sm" {...props} my="3" />
+        return (
+          <Heading
+            as="h3"
+            fontSize="1.25em"
+            fontWeight="600"
+            {...props}
+            mt="6"
+            mb="4"
+          />
+        )
       },
       h4: (props: TypographyProps) => {
-        return <Heading as="h4" size="sm" {...props} my="2" />
+        return (
+          <Heading
+            as="h4"
+            fontSize="1em"
+            fontWeight="600"
+            {...props}
+            mt="6"
+            mb="4"
+          />
+        )
       },
       h5: (props: TypographyProps) => {
-        return <Heading as="h5" size="xs" {...props} my="2" />
+        return (
+          <Heading
+            as="h5"
+            fontSize=".875em"
+            fontWeight="600"
+            {...props}
+            mt="6"
+            mb="4"
+          />
+        )
+      },
+      h6: (props: TypographyProps) => {
+        return (
+          <Heading
+            as="h6"
+            fontSize=".85em"
+            fontWeight="600"
+            {...props}
+            mt="6"
+            mb="4"
+          />
+        )
       },
       ul: (props: TypographyProps) => {
         return <UnorderedList my="1" {...props} />
       },
-      ol: () => {
-        return <OrderedList my="1" />
+      ol: (props: TypographyProps) => {
+        return <OrderedList my="1" {...props} />
       },
       li: ListItem,
-      //@ts-ignore
-      a: ({ children, ...props }: { children: React.ReactNode }) => (
-        <Link mx="1" {...props}>
-          <Text as="ins" color="teal">
-            {children} <Icon as={FaExternalLinkAlt} mx="1" />
-          </Text>
-        </Link>
-      ),
-      p: Text,
+      a: ({ children, ...props }: any) => {
+        const linkColor = useColorModeValue("cyan.700", "cyan.300")
+
+        return (
+          <Link mx="1" {...props}>
+            <Text as="ins" color={linkColor}>
+              {children} <Icon as={FaExternalLinkAlt} mx="1" />
+            </Text>
+          </Link>
+        )
+      },
+      p: (props: TypographyProps) => {
+        return <Text {...props} mb="4" />
+      },
+      blockquote: ({ children, ...props }: any) => {
+        const color = useColorModeValue("gray.500", "gray.400")
+
+        return (
+          <Box
+            as="blockquote"
+            {...props}
+            px="1em"
+            color={color}
+            borderLeftWidth=".25em"
+            borderLeftStyle="solid"
+            borderLeftColor={color}
+          >
+            {children}
+          </Box>
+        )
+      },
     },
   })
   .use(rehypeSanitize, schema)
