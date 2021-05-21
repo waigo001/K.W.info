@@ -1,4 +1,5 @@
 import React from "react"
+import { Tag as ChakraTag, TagLabel } from "@chakra-ui/react"
 
 const Tag: React.FC<{
   props:
@@ -8,7 +9,11 @@ const Tag: React.FC<{
   let contents = <></>
   if (props !== undefined) {
     if (props.slug !== undefined && props.title !== undefined)
-      contents = <div key={props.slug}>{props.title}</div>
+      contents = (
+        <ChakraTag key={props.slug} borderRadius="full" variant="outline">
+          <TagLabel> {props.title}</TagLabel>
+        </ChakraTag>
+      )
   }
   return contents
 }

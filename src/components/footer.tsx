@@ -78,7 +78,7 @@ const Footer = (props: HTMLChakraProps<"footer">) => {
       top="auto"
       bottom="0"
       bg={bg}
-      shadow="dark-lg"
+      shadow="xs"
       {...props}
     >
       <chakra.div height="3em" mx="auto" maxW="8xl">

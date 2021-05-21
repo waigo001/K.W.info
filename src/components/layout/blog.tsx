@@ -17,7 +17,7 @@ const indexPage: React.VFC<Props> = ({ children }: Props) => {
     <VStack minH={height ? height : "100vh"}>
       <Header />
 
-      <Container as="main" maxW="4xl" flex="1">
+      <Container as="main" maxW="6xl" flex="1">
         {children}
       </Container>
 

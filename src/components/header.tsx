@@ -40,7 +40,7 @@ const HeaderContent = () => {
         gridGap={3}
       >
         <IconButton
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", sm: "none" }}
           aria-label="nav-drawer-open"
           variant="ghost"
           isRound
@@ -106,13 +106,12 @@ const HeaderContent = () => {
         <Title fontSize="3xl" />
 
         <Spacer />
-        <Flex display={{ base: "none", md: "flex" }} align="center">
+        <Flex display={{ base: "none", sm: "flex" }} align="center">
           <Link to="/blog">
             <Button
               leftIcon={<FaCalendarDay />}
               colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
               variant="ghost"
-              display={{ base: "none", md: "flex" }}
             >
               Blog
             </Button>
@@ -122,7 +121,6 @@ const HeaderContent = () => {
               leftIcon={<FaInfoCircle />}
               colorScheme={useMatch("/about" + "/*") ? "cyan" : "gray"}
               variant="ghost"
-              display={{ base: "none", md: "flex" }}
             >
               About
             </Button>
@@ -142,6 +140,7 @@ const Header = (props: HTMLChakraProps<"header">) => {
       pos="sticky"
       transition="box-shadow 0.2s, background-color 0.2s"
       ref={ref}
+      zIndex="3"
       width="full"
       top="0"
       left="0"
