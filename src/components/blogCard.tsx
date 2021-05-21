@@ -1,53 +1,18 @@
-import {
-  Card,
-  CardContent,
-  Box,
-  Typography,
-  CardActions,
-  IconButton,
-  makeStyles,
-  Tooltip,
-} from "@material-ui/core"
-
-import LinkIcon from "@material-ui/icons/Link"
-import TwitterIcon from "@material-ui/icons/Twitter"
-import LocalOfferIcon from "@material-ui/icons/LocalOffer"
-
-import React, { useState } from "react"
-import theme from "../styles/theme"
+import React from "react"
 import PostTime from "./postTime"
 import Tag from "./tag"
-import { graphql, Link, useStaticQuery } from "gatsby"
-import CopyToClipBoard from "react-copy-to-clipboard"
-
-const useStyles = makeStyles({
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  tagIcon: {
-    marginRight: theme.spacing(0.5),
-    fontSize: "1rem",
-  },
-  cardTitle: {
-    margin: theme.spacing(0.5),
-    textDecoration: "none",
-    fontSize: "1.5rem",
-    color: theme.palette.text.primary,
-    fontWeight: 700,
-  },
-  cardContent: {
-    flexGrow: 1,
-    paddingBottom: 0,
-  },
-  chip: {
-    margin: theme.spacing(0.5),
-  },
-  iconButton: {
-    marginLeft: "auto",
-  },
-})
+import { Link } from "gatsby"
+import {
+  Flex,
+  IconButton,
+  Link as OtherLink,
+  Spacer,
+  Text,
+  Tooltip,
+  useClipboard,
+  Wrap,
+} from "@chakra-ui/react"
+import { FaClipboard, FaTags, FaTwitter } from "react-icons/fa"
 
 const BlogCard: React.FC<{
   step: Pick<
@@ -62,60 +27,38 @@ const BlogCard: React.FC<{
   }
   url: string | undefined
 }> = ({ step, url }) => {
-  const classes = useStyles()
-
-  const [openTip, setOpenTip] = useState<boolean>(false)
-
-  const handleCloseTip = (): void => {
-    setOpenTip(false)
-  }
-
-  const handleClickButton = (): void => {
-    setOpenTip(true)
-  }
+  const { hasCopied, onCopy } = useClipboard(
+    url ? url + `/blog/` + step.slug : ""
+  )
 
   return (
-    <Card className={classes.card} elevation={2}>
-      <CardContent className={classes.cardContent}>
-        <Box
-          color="text.secondary"
-          display="flex"
-          alignItems="center"
-          fontSize="small"
-        >
-          <PostTime updatedAt={step.updatedAt} publishedAt={step.publishedAt} />
-        </Box>
-        <Typography
-          className={classes.cardTitle}
-          component={Link}
+    <Flex direction="column" boxShadow="xs" p="4" rounded="lg" h="100%">
+      <PostTime updatedAt={step.updatedAt} publishedAt={step.publishedAt} />
+      <Flex my="2">
+        <Text
+          as={Link}
           to={`/blog/${step.slug}`}
-          
+          fontSize="xl"
+          fontWeight="bold"
         >
           {step.title}
-        </Typography>
-        <Box
-          color="text.secondary"
-          display="flex"
-          alignItems="center"
-          fontSize="small"
-          marginTop={1}
-          marginBottom={1}
-        >
-          <LocalOfferIcon className={classes.tagIcon} />
-          タグ
-        </Box>
-        <Box>
-          {step.tags !== undefined ? (
-            step.tags.map(key => <Tag props={key} key={key?.title} />)
-          ) : (
-            <></>
-          )}
-        </Box>
-      </CardContent>
-      <CardActions>
-        <IconButton
-          aria-label="twitter"
-          className={classes.iconButton}
+        </Text>
+      </Flex>
+      <Flex align="center" gridGap="2" my="2">
+        <FaTags />
+        <Text fontSize="sm">タグ</Text>
+      </Flex>
+      <Wrap spacing="2" my="2">
+        {step.tags !== undefined ? (
+          step.tags.map(key => <Tag props={key} key={key?.title} />)
+        ) : (
+          <></>
+        )}
+      </Wrap>
+      <Flex flexGrow={1} />
+      <Flex top="auto" bottom="0" gridGap="2" align="center">
+        <Spacer />
+        <OtherLink
           href={
             `http://twitter.com/share?url=` +
             url +
@@ -125,27 +68,27 @@ const BlogCard: React.FC<{
             `&text=` +
             step.title
           }
-          target="_blank"
-          rel="noreferrer"
+          isExternal
         >
-          <TwitterIcon />
-        </IconButton>
-        <Tooltip
-          arrow
-          open={openTip}
-          onClose={handleCloseTip}
-          disableHoverListener
-          placement="top"
-          title="Copied!"
-        >
-          <CopyToClipBoard text={url + `/blog/` + step.slug}>
-            <IconButton aria-label="link" onClick={handleClickButton}>
-              <LinkIcon />
-            </IconButton>
-          </CopyToClipBoard>
+          <IconButton
+            aria-label="share-to-twitter"
+            isRound
+            variant="ghost"
+            icon={<FaTwitter />}
+          />
+        </OtherLink>
+
+        <Tooltip hasArrow isOpen={hasCopied} placement="top" label="Copied!!">
+          <IconButton
+            aria-label="copy-to-clipboard"
+            isRound
+            variant="ghost"
+            icon={<FaClipboard />}
+            onClick={onCopy}
+          />
         </Tooltip>
-      </CardActions>
-    </Card>
+      </Flex>
+    </Flex>
   )
 }
 

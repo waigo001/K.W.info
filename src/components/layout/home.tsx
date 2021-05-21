@@ -1,100 +1,102 @@
-import {
-  createStyles,
-  CssBaseline,
-  Grid,
-  IconButton,
-  makeStyles,
-  ThemeProvider,
-  Typography,
-} from "@material-ui/core"
-import { GitHub, Instagram, Twitter } from "@material-ui/icons"
-import PropTypes from "prop-types"
 import React, { ReactNode } from "react"
-import theme from "../../styles/theme"
+
+import { Flex, VStack } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/button"
+import { Heading } from "@chakra-ui/layout"
+import { Text } from "@chakra-ui/react"
+
+import {
+  FaCalendarDay,
+  FaGithub,
+  FaInfoCircle,
+  FaInstagram,
+  FaTwitter,
+} from "react-icons/fa"
+import { Link } from "gatsby"
+
 import Title from "../title"
+import { use100vh } from "react-div-100vh"
+import IconLink from "../iconLink"
 
-const useStyles = makeStyles({
-  title: {
-    margin: theme.spacing(3),
-  },
-  linkButton: {
-    margin: theme.spacing(1),
-    color: theme.palette.text.secondary,
-  },
-  bottomText: {
-    margin: theme.spacing(3),
-    fontSize: "0.75rem",
-    fontWeight: 700,
-    color: theme.palette.text.secondary,
-    letterSpacing: "2px",
-  },
-})
+type Props = {
+  children: ReactNode
+}
 
-const indexPage: React.FC<ReactNode> = ({ children }) => {
-  const classes = useStyles()
+const indexPage: React.VFC<Props> = ({ children }) => {
+  const height = use100vh()
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <VStack spacing={8} minH={height ? height : "100vh"} justify="center">
       <header>
-        <Typography
-          variant="h2"
-          component="h1"
-          align="center"
-          className={classes.title}
-        >
+        <Heading as="h1" size="3xl" m={6}>
           <Title />
-        </Typography>
+        </Heading>
       </header>
+      <nav>
+        <Flex justify="center" gridGap={4}>
+          <Link to="/blog">
+            <Button leftIcon={<FaCalendarDay />} variant="ghost">
+              Blog
+            </Button>
+          </Link>
+          <Link to="/about">
+            <Button variant="ghost" leftIcon={<FaInfoCircle />}>
+              About
+            </Button>
+          </Link>
+        </Flex>
+      </nav>
       <main>{children}</main>
       <footer>
-        <Grid container justify="center">
-          <Grid item>
-            <IconButton
-              aria-label="Github"
-              className={classes.linkButton}
-              href="https://github.com/waigo001"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <GitHub fontSize="large" />
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <IconButton
-              aria-label="Twitter"
-              className={classes.linkButton}
-              href="https://twitter.com/waigo001"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Twitter fontSize="large" />
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <IconButton
-              aria-label="Instagram"
-              className={classes.linkButton}
-              href="https://www.instagram.com/waigo001/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Instagram fontSize="large" />
-            </IconButton>
-          </Grid>
-        </Grid>
-        <Typography align="center" className={classes.bottomText}>
+        <Flex justify="center" gridGap={4}>
+          <IconLink
+            href="https://github.com/waigo001"
+            aria-label="Github"
+            isRound
+            size="lg"
+            variant="ghost"
+            icon={<FaGithub size="1.5em" />}
+          />
+
+          <IconLink
+            href="https://twitter.com/waigo001"
+            aria-label="Twitter"
+            isRound
+            size="lg"
+            variant="ghost"
+            icon={<FaTwitter size="1.5em" />}
+          />
+
+          <IconLink
+            href="https://www.instagram.com/waigo001/"
+            aria-label="Instagram"
+            isRound
+            size="lg"
+            variant="ghost"
+            icon={<FaInstagram size="1.5em" />}
+          />
+        </Flex>
+        <Text
+          fontSize="xs"
+          letterSpacing="1.5px"
+          fontWeight="700"
+          align="center"
+          m={8}
+        >
           Copyright &copy; 2020 <Title />
-        </Typography>
-        <Typography align="center" className={classes.bottomText}>
+        </Text>
+        <Text
+          fontSize="xs"
+          letterSpacing="1.5px"
+          fontWeight="700"
+          align="center"
+          m={8}
+        >
           All rights reserved.
-        </Typography>
+        </Text>
       </footer>
-    </ThemeProvider>
+    </VStack>
   )
-}
-indexPage.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default indexPage
