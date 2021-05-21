@@ -106,7 +106,7 @@ const HeaderContent = () => {
         <Title fontSize="3xl" />
 
         <Spacer />
-        <Flex display={{ base: "none", sm: "flex" }} align="center">
+        <Flex display={{ base: "none", sm: "flex" }} align="center" gridGap="2">
           <Link to="/blog">
             <Button
               leftIcon={<FaCalendarDay />}
