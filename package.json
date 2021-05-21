@@ -18,7 +18,7 @@
     "date-fns": "^2.21.3",
     "dotenv": "^9.0.2",
     "framer-motion": "^4.1.16",
-    "gatsby": "^3.5.0",
+    "gatsby": "^3.5.1",
     "gatsby-image": "^3.5.0",
     "gatsby-plugin-manifest": "^3.5.0",
     "gatsby-plugin-offline": "^4.5.1",
