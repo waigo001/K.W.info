@@ -3,12 +3,13 @@ import PostTime from "./postTime"
 import Tag from "./tag"
 import { Link } from "gatsby"
 import {
-  Box,
   Flex,
   IconButton,
   Link as OtherLink,
   Spacer,
   Text,
+  Tooltip,
+  useClipboard,
   Wrap,
 } from "@chakra-ui/react"
 import { FaClipboard, FaTags, FaTwitter } from "react-icons/fa"
@@ -26,6 +27,10 @@ const BlogCard: React.FC<{
   }
   url: string | undefined
 }> = ({ step, url }) => {
+  const { hasCopied, onCopy } = useClipboard(
+    url ? url + `/blog/` + step.slug : ""
+  )
+
   return (
     <Flex direction="column" boxShadow="xs" p="4" rounded="lg" h="100%">
       <PostTime updatedAt={step.updatedAt} publishedAt={step.publishedAt} />
@@ -73,14 +78,15 @@ const BlogCard: React.FC<{
           />
         </OtherLink>
 
-        <OtherLink aria-label="copy-to-clipboard">
+        <Tooltip hasArrow isOpen={hasCopied} placement="top" label="Copied!!">
           <IconButton
             aria-label="copy-to-clipboard"
             isRound
             variant="ghost"
             icon={<FaClipboard />}
+            onClick={onCopy}
           />
-        </OtherLink>
+        </Tooltip>
       </Flex>
     </Flex>
   )

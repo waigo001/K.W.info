@@ -34,7 +34,6 @@
     "install": "^0.13.0",
     "npm": "^7.12.1",
     "react": "^17.0.2",
-    "react-copy-to-clipboard": "^5.0.3",
     "react-div-100vh": "^0.6.0",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
