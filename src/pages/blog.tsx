@@ -7,18 +7,16 @@ import { SimpleGrid } from "@chakra-ui/react"
 
 export const query = graphql`
   query BlogPages {
-    allMicrocmsBlogs(sort: { fields: updatedAt, order: DESC }) {
+    allMdx {
       nodes {
-        body
-        description
+        id
         slug
-        tags {
-          slug
+        frontmatter {
           title
+          tags
+          createdAt
+          updatedAt
         }
-        title
-        publishedAt
-        updatedAt
       }
     }
     site {
@@ -36,10 +34,10 @@ const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
     <Layout>
       <SEO title="Blog" description="日常的なブログの一覧" />
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
-        {data.allMicrocmsBlogs.nodes.map(step => (
+        {data.allMdx.nodes.map(node => (
           <BlogCard
-            step={step}
-            key={step.slug}
+            node={node}
+            key={node.slug}
             url={data.site?.siteMetadata?.siteUrl}
           />
         ))}

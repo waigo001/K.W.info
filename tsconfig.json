@@ -1,17 +1,18 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./gatsby/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
     "module": "esnext",
-    "lib": ["dom", "es2017"],
-    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "jsx": "preserve",
     "strict": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true
   }
 }
