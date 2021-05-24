@@ -69,5 +69,8 @@ module.exports = {
         gatsbyRemarkPlugins: [],
       },
     },
+    {
+      resolve: "gatsby-plugin-emotion",
+    },
   ],
 }

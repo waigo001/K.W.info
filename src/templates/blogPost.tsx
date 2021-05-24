@@ -7,6 +7,9 @@ import PostTime from "../components/postTime"
 import { Divider, Flex, Text, Wrap } from "@chakra-ui/react"
 import { FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
+import { PostRenderer } from "../components/postRenderer"
+import { Article } from "../components/article"
 
 export const query = graphql`
   query BlogPost($id: String!) {
@@ -23,7 +26,9 @@ export const query = graphql`
   }
 `
 
-const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({ data }) => {
+const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
+  data,
+}) => {
   return (
     <Layout>
       <SEO
@@ -52,7 +57,11 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({ data }) => 
           )}
         </Wrap>
         <Divider my="2" />
-        <MDXRenderer>{data.mdx?.body ? data.mdx?.body : ""}</MDXRenderer>
+        <Article>
+          <MDXProvider components={PostRenderer}>
+            <MDXRenderer>{data.mdx?.body ? data.mdx?.body : ""}</MDXRenderer>
+          </MDXProvider>
+        </Article>
       </Flex>
     </Layout>
   )

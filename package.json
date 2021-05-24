@@ -19,6 +19,7 @@
     "framer-motion": "^4.1.17",
     "gatsby": "^3.5.1",
     "gatsby-image": "^3.5.0",
+    "gatsby-plugin-emotion": "^6.5.0",
     "gatsby-plugin-manifest": "^3.5.0",
     "gatsby-plugin-mdx": "^2.5.1",
     "gatsby-plugin-offline": "^4.5.1",
@@ -41,8 +42,11 @@
     "unified": "^9.2.1"
   },
   "devDependencies": {
+    "@emotion/eslint-plugin": "^11.2.0",
+    "@types/mdx-js__react": "^1.5.3",
     "@types/rehype-react": "^4.0.0",
     "@types/unist": "^2.0.3",
+    "eslint": "^7.27.0",
     "jsonc-parser": "^3.0.0",
     "prettier": "^2.3.0",
     "ts-graphql-plugin": "^2.1.3",
