@@ -9,7 +9,6 @@ import { FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 import { PostRenderer } from "../components/postRenderer"
-import { Article } from "../components/article"
 
 export const query = graphql`
   query BlogPost($id: String!) {
@@ -57,11 +56,9 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
           )}
         </Wrap>
         <Divider my="2" />
-        <Article>
-          <MDXProvider components={PostRenderer}>
-            <MDXRenderer>{data.mdx?.body ? data.mdx?.body : ""}</MDXRenderer>
-          </MDXProvider>
-        </Article>
+        <MDXProvider components={PostRenderer}>
+          <MDXRenderer>{data.mdx?.body ? data.mdx?.body : ""}</MDXRenderer>
+        </MDXProvider>
       </Flex>
     </Layout>
   )
