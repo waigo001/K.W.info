@@ -61,6 +61,7 @@ const InlineCode = (props: any) => (
   <chakra.code
     apply="mdx.code"
     color={useColorModeValue("cyan.600", "cyan.200")}
+    fontFamily="mono"
     {...props}
   />
 )

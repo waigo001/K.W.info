@@ -66,7 +66,14 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        gatsbyRemarkPlugins: [],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              icon: false,
+            },
+          },
+        ],
       },
     },
     {

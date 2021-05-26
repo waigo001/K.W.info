@@ -1,5 +1,11 @@
 import { extendTheme } from "@chakra-ui/react"
 const theme = {
+  fonts: {
+    heading:
+      '-apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans","BIZ UDPGothic",Meiryo,sans-serif,"Segoe UI Emoji"',
+    body: '-apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans","BIZ UDPGothic",Meiryo,sans-serif,"Segoe UI Emoji"',
+    mono: 'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New","BIZ UDGothic",monospace',
+  },
   config: {
     useSystemColorMode: true,
   },
@@ -17,26 +23,23 @@ const theme = {
       lineHeight: 1.2,
       fontWeight: "bold",
       fontSize: "1.875rem",
-      letterSpacing: "-.025em",
     },
     h2: {
-      mt: "4rem",
+      mt: "3rem",
       mb: "0.5rem",
       lineHeight: 1.3,
       fontWeight: "semibold",
       fontSize: "1.5rem",
-      letterSpacing: "-.025em",
       "& + h3": {
         mt: "1.5rem",
       },
     },
     h3: {
       mt: "3rem",
-      // mb: "0.5rem",
+      mb: "0.25rem",
       lineHeight: 1.25,
       fontWeight: "semibold",
       fontSize: "1.25rem",
-      letterSpacing: "-.025em",
     },
     h4: {
       mt: "3rem",
