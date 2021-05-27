@@ -14,6 +14,9 @@ const theme = {
       body: {
         fontFeatureSettings: '"palt"',
       },
+      "*, *::before, &::after": {
+        overflowWrap: "break-word",
+      },
     }),
   },
   mdx: {
