@@ -34,7 +34,12 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
         title={data.mdx?.frontmatter?.title}
         description={data.mdx?.excerpt}
       />
-      <Flex direction="column" p="4" boxShadow="xs" rounded="lg">
+      <Flex
+        direction="column"
+        p="4"
+        boxShadow={{ base: "none", md: "lg" }}
+        rounded="lg"
+      >
         <PostTime
           updatedAt={data.mdx?.frontmatter?.updatedAt}
           publishedAt={data.mdx?.frontmatter?.createdAt}

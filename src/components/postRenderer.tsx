@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react"
 import { MDXProviderComponentsProp } from "@mdx-js/react"
 import React from "react"
+import CodeBlock from "./codeBlock"
 
 const Table = (props: HTMLChakraProps<"table">) => (
   <chakra.div overflowX="auto">
@@ -76,7 +77,7 @@ export const PostRenderer: MDXProviderComponentsProp = {
   inlineCode: InlineCode,
   pre: props => <chakra.div my="2em" borderRadius="sm" {...props} />,
   kbd: Kbd,
-
+  code: CodeBlock,
   table: Table,
   th: THead,
   td: TData,
