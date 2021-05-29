@@ -61,7 +61,7 @@ const LinkedHeading = (props: HTMLChakraProps<"h2">) => (
 const InlineCode = (props: any) => (
   <chakra.code
     apply="mdx.code"
-    color={useColorModeValue("cyan.600", "cyan.200")}
+    color={useColorModeValue("cyan.700", "cyan.200")}
     fontFamily="mono"
     {...props}
   />

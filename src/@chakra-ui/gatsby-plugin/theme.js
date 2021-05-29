@@ -51,6 +51,7 @@ const theme = {
       fontSize: "1.125rem",
     },
     a: {
+      textDecoration: "underline",
       color: "cyan.500",
       fontWeight: "semibold",
       transition: "color 0.15s",
