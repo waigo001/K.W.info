@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/layout"
-import { format, isAfter } from "date-fns"
+import { format, formatISO, isAfter } from "date-fns"
 import { parseISO } from "date-fns/esm"
 import React from "react"
 import { FaClock, FaRegClock } from "react-icons/fa"
@@ -9,7 +9,7 @@ interface Prop {
   publishedAt?: string
 }
 
-const PostTime: React.FC<Prop> = ({
+const PostTime: React.VFC<Prop> = ({
   updatedAt = "19700101T000000Z",
   publishedAt = "19700101T000000Z",
 }) => {
@@ -18,33 +18,27 @@ const PostTime: React.FC<Prop> = ({
 
   const isUpdated = isAfter(updatedTime, publishedTime)
 
-  let returnItem = <></>
-
-  if (isUpdated) {
-    returnItem = (
-      <Flex align="center" gridGap="2">
+  return (
+    <>
+      <Flex align="center" gridGap="2" display={isUpdated ? "flex" : "none"}>
         <Icon as={FaRegClock} />
         <Text fontSize="sm">
-          <time dateTime={updatedAt}>
-            {format(updatedTime, "yyyy/MM/dd HH:mm")}
+          <time dateTime={formatISO(updatedTime)} itemProp="dateModified">
+            {format(updatedTime, "yyyy/MM/dd")}
           </time>
         </Text>
       </Flex>
-    )
-  } else {
-    returnItem = (
-      <Flex align="center" gridGap="2">
+
+      <Flex align="center" gridGap="2" display={!isUpdated ? "flex" : "none"}>
         <Icon as={FaClock} />
         <Text fontSize="sm">
-          <time dateTime={publishedAt}>
-            {format(publishedTime, "yyyy/MM/dd HH:mm")}
+          <time dateTime={formatISO(publishedTime)} itemProp="datePublished">
+            {format(publishedTime, "yyyy/MM/dd")}
           </time>
         </Text>
       </Flex>
-    )
-  }
-
-  return returnItem
+    </>
+  )
 }
 
 export default PostTime
