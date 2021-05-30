@@ -1,8 +1,8 @@
 import React from "react"
-import Layout from "../components/layout/blog"
-import SEO from "../components/seo"
+import Layout from "../../components/layout/blog"
+import SEO from "../../components/seo"
 import { graphql, PageProps } from "gatsby"
-import BlogCard from "../components/blogCard"
+import BlogCard from "../../components/blogCard"
 import { SimpleGrid } from "@chakra-ui/react"
 
 export const query = graphql`
