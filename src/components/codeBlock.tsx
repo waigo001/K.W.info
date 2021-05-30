@@ -44,7 +44,6 @@ const CodeBlock: React.VFC<Props> = ({ children, className, metastring }) => {
   const [editorCode] = useState(children.trim())
   const theme = useColorModeValue(lightTheme, darkTheme)
 
-  //const highlightColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200")
   const highlightColor = theme.plain.color + "22"
   const shouldHighlightLine = calculateLinesToHighlight(metastring)
 
@@ -52,7 +51,7 @@ const CodeBlock: React.VFC<Props> = ({ children, className, metastring }) => {
     <div>
       {title && (
         <Box
-          py={1}
+          py={0.5}
           px={3}
           fontFamily="mono"
           fontWeight="semibold"
@@ -78,8 +77,6 @@ const CodeBlock: React.VFC<Props> = ({ children, className, metastring }) => {
             style={style}
             data-language={language}
           >
-           
-
             <Box
               as="code"
               className={className}
