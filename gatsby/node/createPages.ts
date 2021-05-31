@@ -2,6 +2,7 @@ import { GatsbyNode } from "gatsby"
 import Path from "path"
 
 const BlogPostTemplate = Path.resolve("./src/templates/blogPost.tsx")
+const BlogTemplate = Path.resolve("./src/templates/blog.tsx")
 
 export type GatsbyNodeQuery = {
   readonly allMdx: {
@@ -14,6 +15,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
   actions: { createPage },
   reporter,
 }) => {
+  createPage({
+    path: "/blog",
+    component: BlogTemplate,
+    context: {
+      statusList:
+        process.env.NODE_ENV === "production"
+          ? ["public"]
+          : ["public", "private"],
+    },
+  })
+
   const result = await graphql<GatsbyNodeQuery>(
     /* GraphQL */ `
       query BlogPaths($statusList: [String!]!) {
