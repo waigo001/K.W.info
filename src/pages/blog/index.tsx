@@ -7,7 +7,7 @@ import { SimpleGrid } from "@chakra-ui/react"
 
 export const query = graphql`
   query BlogPages {
-    allMdx {
+    allMdx(sort: { fields: frontmatter___updatedAt, order: DESC }) {
       nodes {
         id
         slug
@@ -27,7 +27,7 @@ export const query = graphql`
   }
 `
 
-const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
+const BlogPage: React.VFC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
   data,
 }) => {
   return (
