@@ -32,7 +32,7 @@ const BlogCard: React.VFC<Props> = ({ node, url }) => {
   )
 
   return (
-    <Flex direction="column" boxShadow="xs" p="4" rounded="lg" h="100%">
+    <Flex direction="column" boxShadow="md" p="4" rounded="lg" h="100%">
       <PostTime
         updatedAt={node.frontmatter?.updatedAt}
         publishedAt={node.frontmatter?.createdAt}

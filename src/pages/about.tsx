@@ -1,51 +1,47 @@
-import { Container, Heading, ListItem, OrderedList } from "@chakra-ui/layout"
-import { Text, Flex } from "@chakra-ui/react"
-import { graphql, PageProps } from "gatsby"
+import { Container, Heading, ListItem, UnorderedList } from "@chakra-ui/layout"
+import { Flex, chakra } from "@chakra-ui/react"
+import { PageProps } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import Layout from "../components/layout/blog"
 import SEO from "../components/seo"
 
-export const query = graphql`
-  query AboutPage {
-    image: file(relativePath: { eq: "favicon.png" }) {
-      childrenImageSharp {
-        fluid(maxWidth: 512) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`
-const AboutPage: React.VFC<PageProps<GatsbyTypes.AboutPageQuery>> = ({
-  data,
-}) => {
+const AboutPage: React.VFC<PageProps<GatsbyTypes.AboutPageQuery>> = () => {
   return (
     <Layout>
       <SEO title="About" description="K.W.infoについて" />
       <Container maxW="md">
-        <Flex justify="center">
-          {/*<Image alt="K.W." src={kwimage} my="4" w="60%" h="60%" />*/}
+        <Flex justify="center" my="6">
+          <StaticImage
+            src="../images/favicon.png"
+            alt="User Image"
+            width={512}
+          />
         </Flex>
         <Heading
           as="h1"
-          fontSize="4xl"
+          fontSize="6xl"
           fontFamily="Josefin Sans"
           textAlign="center"
         >
           K.W.
         </Heading>
-        <Heading as="h2">K.W.について</Heading>
-        <OrderedList>
+        <Heading as="h2" apply="mdx.h2">
+          K.W.について
+        </Heading>
+        <UnorderedList>
           <ListItem>社会人</ListItem>
           <ListItem>カメラ</ListItem>
           <ListItem>コーヒー好き</ListItem>
           <ListItem>パソコン好き</ListItem>
           <ListItem>Vue.jsしか触れません(と思ってた)</ListItem>
-        </OrderedList>
-        <Heading as="h2">このブログについて</Heading>
-        <Text>
+        </UnorderedList>
+        <Heading as="h2" apply="mdx.h2">
+          このブログについて
+        </Heading>
+        <chakra.p apply="mdx.p">
           個人的なブログです。ただひたすら徒然なるようにひぐらししていいきます。
-        </Text>
+        </chakra.p>
       </Container>
     </Layout>
   )

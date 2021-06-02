@@ -26,8 +26,18 @@ module.exports = {
         path: `${__dirname}/posts`,
       },
     },
+    {
+      resolve: "gatsby-plugin-image",
+      options: {
+        defaults: {
+          formats: ["webp"],
+        },
+      },
+    },
     "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
+    {
+      resolve: "gatsby-plugin-sharp",
+    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {

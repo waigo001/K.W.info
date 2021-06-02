@@ -37,7 +37,7 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
       <Flex
         direction="column"
         p="4"
-        boxShadow={{ base: "none", md: "lg" }}
+        boxShadow={{ base: "none", md: "md" }}
         rounded="lg"
       >
         <PostTime
