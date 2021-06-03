@@ -1,22 +1,23 @@
 import { Container, Heading, ListItem, UnorderedList } from "@chakra-ui/layout"
 import { Flex, chakra } from "@chakra-ui/react"
-import { PageProps } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import Layout from "../components/layout/blog"
 import SEO from "../components/seo"
 
-const AboutPage: React.VFC<PageProps<GatsbyTypes.AboutPageQuery>> = () => {
+const AboutPage: React.VFC = () => {
   return (
     <Layout>
       <SEO title="About" description="K.W.infoについて" />
       <Container maxW="md">
-        <Flex justify="center" my="6">
-          <StaticImage
-            src="../images/favicon.png"
-            alt="User Image"
-            width={512}
-          />
+        <Flex justify="center" my="6" alignContent="center">
+          <Flex maxW="60vw">
+            <StaticImage
+              src="../images/favicon.png"
+              alt="User Image"
+              placeholder="blurred"
+            />
+          </Flex>
         </Flex>
         <Heading
           as="h1"
