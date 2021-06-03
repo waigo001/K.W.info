@@ -28,7 +28,11 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "visualstudioexptteam.vscodeintellicode",
-    "xyc.vscode-mdx-preview"
+    "xyc.vscode-mdx-preview",
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+    "mhutchie.git-graph",
+    "graphql.vscode-graphql"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
