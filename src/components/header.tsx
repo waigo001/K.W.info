@@ -130,22 +130,22 @@ const HeaderContent = () => {
 const Header = (props: HTMLChakraProps<"header">) => {
   const ref = React.useRef<HTMLHeadingElement>(null)
   const bg = useColorModeValue("white", "gray.800")
+  const shadow = useColorModeValue("md", "xl")
 
   return (
     <chakra.header
       pos="sticky"
-      transition="box-shadow 0.2s, background-color 0.2s"
       ref={ref}
       zIndex="3"
       width="full"
       top="0"
       left="0"
       right="0"
-      shadow="md"
+      boxShadow={shadow}
       bg={bg}
       {...props}
     >
-      <chakra.div height="4em" mx="auto" maxW="8xl">
+      <chakra.div height="4rem" mx="auto" maxW="8xl">
         <HeaderContent />
       </chakra.div>
     </chakra.header>

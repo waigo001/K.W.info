@@ -10,6 +10,7 @@ import {
   Text,
   Tooltip,
   useClipboard,
+  useColorModeValue,
   Wrap,
 } from "@chakra-ui/react"
 import { FaClipboard, FaTags, FaTwitter } from "react-icons/fa"
@@ -31,8 +32,18 @@ const BlogCard: React.VFC<Props> = ({ node, url }) => {
     url ? url + `/blog/` + node.slug : ""
   )
 
+  const bg = useColorModeValue("white", "gray.800")
+  const shadow = useColorModeValue("md", "xl")
+
   return (
-    <Flex direction="column" boxShadow="md" p="4" rounded="lg" h="100%">
+    <Flex
+      direction="column"
+      bg={bg}
+      boxShadow={shadow}
+      p="4"
+      rounded="lg"
+      h="100%"
+    >
       <PostTime
         updatedAt={node.frontmatter?.updatedAt}
         publishedAt={node.frontmatter?.createdAt}
@@ -42,7 +53,7 @@ const BlogCard: React.VFC<Props> = ({ node, url }) => {
           as={Link}
           to={`/blog/${node.slug}`}
           fontSize="xl"
-          fontWeight="bold"
+          fontWeight="semibold"
         >
           {node.frontmatter?.title}
         </Text>

@@ -37,26 +37,30 @@ const TData = (props: HTMLChakraProps<"td">) => (
   />
 )
 
-const LinkedHeading = (props: HTMLChakraProps<"h2">) => (
-  <chakra.h2 data-group="" css={{ scrollMarginBlock: "6.875rem" }} {...props}>
-    <span className="content">{props.children}</span>
-    {props.id && (
-      <chakra.a
-        aria-label="anchor"
-        color="teal.500"
-        fontWeight="normal"
-        outline="none"
-        _focus={{ opacity: 1, boxShadow: "outline" }}
-        opacity={0}
-        _groupHover={{ opacity: 1 }}
-        ml="0.375rem"
-        href={`#${props.id}`}
-      >
-        #
-      </chakra.a>
-    )}
-  </chakra.h2>
-)
+const LinkedHeading = (props: HTMLChakraProps<"h2">) => {
+  const color = useColorModeValue("cyan.600", "cyan.400")
+
+  return (
+    <chakra.h2 data-group="" css={{ scrollMarginTop: "6rem" }} {...props}>
+      <span className="content">{props.children}</span>
+      {props.id && (
+        <chakra.a
+          aria-label="anchor"
+          color={color}
+          fontWeight="normal"
+          outline="none"
+          _focus={{ opacity: 1, boxShadow: "outline" }}
+          opacity={0}
+          _groupHover={{ opacity: 1 }}
+          ml="0.375rem"
+          href={`#${props.id}`}
+        >
+          #
+        </chakra.a>
+      )}
+    </chakra.h2>
+  )
+}
 
 const InlineCode = (props: any) => (
   <chakra.code
@@ -81,9 +85,10 @@ export const PostRenderer: MDXProviderComponentsProp = {
   table: Table,
   th: THead,
   td: TData,
-  a: React.forwardRef((props: any, ref: any) => (
-    <chakra.a ref={ref} apply="mdx.a" {...props} />
-  )),
+  a: React.forwardRef((props: any, ref: any) => {
+    const color = useColorModeValue("cyan.600", "cyan.400")
+    return <chakra.a ref={ref} apply="mdx.a" {...props} color={color} />
+  }),
   p: props => <chakra.p apply="mdx.p" {...props} />,
   ul: props => <chakra.ul apply="mdx.ul" {...props} />,
   ol: props => <chakra.ol apply="mdx.ul" {...props} />,

@@ -36,7 +36,7 @@ const BlogPage: React.VFC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
   return (
     <Layout>
       <SEO title="Blog" description="日常的なブログの一覧" />
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing={4}>
         {data.allMdx.nodes.map(node => (
           <BlogCard
             node={node}

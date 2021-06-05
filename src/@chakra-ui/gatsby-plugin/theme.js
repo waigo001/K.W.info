@@ -1,10 +1,11 @@
 import { extendTheme } from "@chakra-ui/react"
+
 const theme = {
   fonts: {
     heading:
-      '-apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans","BIZ UDPGothic",Meiryo,sans-serif,"Segoe UI Emoji"',
-    body: '-apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans","BIZ UDPGothic",Meiryo,sans-serif,"Segoe UI Emoji"',
-    mono: 'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New","BIZ UDGothic",monospace',
+      '-apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans","Segoe UI","Yu Gothic UI",Meiryo,sans-serif,"Segoe UI Emoji"',
+    body: '-apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans","Segoe UI","Yu Gothic UI",Meiryo,sans-serif,"Segoe UI Emoji"',
+    mono: 'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
   },
   config: {
     useSystemColorMode: true,
@@ -12,7 +13,7 @@ const theme = {
   styles: {
     global: () => ({
       body: {
-        fontFeatureSettings: '"palt"',
+        textRendering: "optimizeLegibility",
       },
       "*, *::before, &::after": {
         overflowWrap: "break-word",
@@ -58,6 +59,7 @@ const theme = {
       transitionTimingFunction: "ease-out",
       _hover: {
         color: "cyan.600",
+        textDecoration: "underline",
       },
     },
     p: {

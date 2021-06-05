@@ -4,7 +4,7 @@ import Layout from "../components/layout/blog"
 import SEO from "../components/seo"
 import Tag from "../components/tag"
 import PostTime from "../components/postTime"
-import { Divider, Flex, Text, Wrap } from "@chakra-ui/react"
+import { Divider, Flex, Text, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
@@ -28,6 +28,10 @@ export const query = graphql`
 const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
   data,
 }) => {
+  const shadow = useColorModeValue(
+    { base: "none", md: "md" },
+    { base: "none", md: "xl" }
+  )
   return (
     <Layout>
       <SEO
@@ -36,15 +40,16 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
       />
       <Flex
         direction="column"
-        p="4"
-        boxShadow={{ base: "none", md: "md" }}
+        px={{ base: "0", sm: "4", md: "6" }}
+        py="2"
+        boxShadow={shadow}
         rounded="lg"
       >
         <PostTime
           updatedAt={data.mdx?.frontmatter?.updatedAt}
           publishedAt={data.mdx?.frontmatter?.createdAt}
         />
-        <Text fontSize="xl" fontWeight="bold" my="2">
+        <Text as="h1" fontSize="xl" fontWeight="semibold" my="2">
           {data.mdx?.frontmatter?.title}
         </Text>
         <Flex align="center" gridGap="2" my="2">
