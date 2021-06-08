@@ -11,7 +11,7 @@ const AboutPage: React.VFC = () => {
       <SEO title="About" description="K.W.infoについて" />
       <Container maxW="md">
         <Flex justify="center" my="6" alignContent="center">
-          <Flex maxW="60vw">
+          <Flex maxW="60%">
             <StaticImage
               src="../images/favicon.png"
               alt="User Image"
