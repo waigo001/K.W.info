@@ -24,7 +24,7 @@
     "gatsby-plugin-react-helmet": "^4.5.0",
     "gatsby-plugin-robots-txt": "^1.6.2",
     "gatsby-plugin-sharp": "^3.5.0",
-    "gatsby-plugin-sitemap": "^4.1.0",
+    "gatsby-plugin-sitemap": "^4.3.0",
     "gatsby-plugin-twitter": "^3.5.0",
     "gatsby-plugin-typegen": "^2.2.4",
     "gatsby-remark-autolink-headers": "^4.3.0",
