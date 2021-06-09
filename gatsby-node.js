@@ -1,38 +1,11 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
+"use strict"
 
-// You can delete this file if you're not using it
-const path = require("path")
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
-  const result = await graphql(
-    `
-      query BlogPaths {
-        allMicrocmsBlogs {
-          edges {
-            node {
-              slug
-              id
-            }
-          }
-        }
-      }
-    `
-  )
-  if (result.errors) {
-    throw result.errors
-  }
+require("ts-node").register({
+  transpileOnly: true,
+  compilerOptions: {
+    module: "commonjs",
+    target: "es5",
+  },
+})
 
-  result.data.allMicrocmsBlogs.edges.forEach(edge => {
-    createPage({
-      path: `/blog/${edge.node.slug}`,
-      component: path.resolve("./src/templates/blogPost.tsx"),
-      context: {
-        id: edge.node.id,
-      },
-    })
-  })
-}
+module.exports = require("./gatsby/node")

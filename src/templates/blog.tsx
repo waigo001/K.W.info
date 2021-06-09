@@ -6,19 +6,20 @@ import BlogCard from "../components/blogCard"
 import { SimpleGrid } from "@chakra-ui/react"
 
 export const query = graphql`
-  query BlogPages {
-    allMicrocmsBlogs(sort: { fields: updatedAt, order: DESC }) {
+  query BlogPages($statusList: [String!]!) {
+    allMdx(
+      sort: { fields: frontmatter___updatedAt, order: DESC }
+      filter: { frontmatter: { status: { in: $statusList } } }
+    ) {
       nodes {
-        body
-        description
+        id
         slug
-        tags {
-          slug
+        frontmatter {
           title
+          tags
+          createdAt
+          updatedAt
         }
-        title
-        publishedAt
-        updatedAt
       }
     }
     site {
@@ -29,17 +30,17 @@ export const query = graphql`
   }
 `
 
-const BlogPage: React.FC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
+const BlogPage: React.VFC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
   data,
 }) => {
   return (
     <Layout>
       <SEO title="Blog" description="日常的なブログの一覧" />
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
-        {data.allMicrocmsBlogs.nodes.map(step => (
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing={4}>
+        {data.allMdx.nodes.map(node => (
           <BlogCard
-            step={step}
-            key={step.slug}
+            node={node}
+            key={node.slug}
             url={data.site?.siteMetadata?.siteUrl}
           />
         ))}

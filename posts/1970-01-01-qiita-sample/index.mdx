@@ -1,0 +1,431 @@
+---
+title: "QiitaのサンプルMarkdown"
+tags: ["Qiita","markdown"]
+status: "private"
+createdAt: "1970-01-01T00:00:00.000Z"
+updatedAt: "1970-01-01T00:00:00.000Z"
+---
+
+Markdown 記法 チートシート
+Markdown 記法のチートシートです。
+本ページでは Qiita で使用可能な Markdown のみ掲載しているため、一部原文と異なります。
+Markdown の原文については、[Daring Fireball: Markdown Syntax Documentation]
+(http://daringfireball.net/projects/markdown/syntax.php)をご覧下さい。
+また、コードに関する記法は[GitHub Flavored Markdown](http://github.github.com/github-flavored-markdown/)に準拠しています。
+Qiita でシンタックスハイライト可能な言語一覧については、 [シンタックスハイライト可能な言語](http://qiita.com/Qiita/items/e84f5aad7757afce82ba) をご覧下さい。
+
+## Code - コードの挿入
+
+たとえば、Ruby で記述したコードをファイル名「qiita.rb」として投稿したいときは、 **バッククオート** を使用して以下のように投稿するとシンタックスハイライトが適用されます。
+**コードブロック上下に空行を挿入しないと正しく表示されないことがあります。**
+
+> (空行)
+> \`\`\`ruby:qiita.rb
+> puts 'The best way to log and share programmers knowledge.'
+> \`\`\`
+> (空行)
+
+**結果**
+
+```ruby:qiita.rb
+puts 'The best way to log and share programmers knowledge.'
+```
+
+また、コードをインライン表示することも可能です。
+
+> \` puts 'Qiita'` はプログラマのための技術情報共有サービスです。
+
+**結果**
+
+` puts 'Qiita'` はプログラマのための技術情報共有サービスです。
+
+インラインコードが n 個連続するバッククオートを含む場合、n+1 連続のバッククオートで囲みます。
+
+> \`\` \`バッククオート\` \`\` や \`\`\` \`\`2 連続バッククオート\`\` \`\`\` も記述できます。
+
+**結果**
+
+`` `バッククオート` `` や ` ``2連続バッククオート`` ` も記述できます。
+
+### Gist 連携について
+
+##### GitHub アカウントで Qiita にログインされている場合
+
+投稿時、Octocat アイコンにチェックを入れていただくと連携を行います。
+コードを含むアイテムを投稿するとコード部分を抽出し、同じ内容が Gist にも投稿される仕組みになっています。
+
+Gist との連携は、
+
+- コードの投稿
+- Qiita 側でのコードの編集
+
+の２点について連携しています。
+Gist 側でコードを編集されても、 **Qiita には反映されません** のでご注意下さい。
+
+## Format Text - テキストの装飾
+
+### Headers - 見出し
+
+- \# これは H1 タグです
+- \## これは H2 タグです
+- \###### これは H6 タグです
+
+### Emphasis - 強調
+
+```markdown
+*イタリック体*を使うには \_ か \* で囲みます。
+**太字**を使うには \_\_ か \*\* で囲みます。
+```
+
+*イタリック体*を使うには \_ か \* で囲みます。
+**太字**を使うには \_\_ か \*\* で囲みます。
+
+### Strikethrough - 打ち消し線
+
+```markdown
+打ち消し線を使うには ~~ で囲みます。 ~~打ち消し~~
+```
+
+打ち消し線を使うには ~~ で囲みます。 ~~打ち消し~~
+
+イタリックや太文字と同様に前後に **半角スペース** か **改行文字** が必要です。
+
+## Lists - リスト
+
+### Disc 型
+
+- 文頭に「\*」「+」「-」のいずれかを入れると Disc 型リストになります
+- 要点をまとめる際に便利です
+- リストを挿入する際は、 **リストの上下に空行がないと正しく表示されません。また「\*」「+」「-」の後にはスペースが必要です**
+
+### Decimal 型
+
+1.  文頭に「数字.」を入れると Decimal 型リストになります
+2.  後からの挿入/移動を考慮して、1. 2. 3. と順番にするのではなく、1. 1. 1. という風に同じ数字にしておくといい具合です。
+3.  リストを挿入する際は、 **リストの上下に空行がないと正しく表示されません。また「数字.」の後にはスペースが必要です**
+
+### Definition 型
+
+HTML の`<dl>`タグをそのまま使うことで実現できます。
+
+```html
+<dl>
+  <dt>リンゴ</dt>
+  <dd>赤いフルーツ</dd>
+  <dt>オレンジ</dt>
+  <dd>橙色のフルーツ</dd>
+</dl>
+```
+
+次のようになります。
+
+<dl>
+  <dt>リンゴ</dt>
+  <dd>赤いフルーツ</dd>
+  <dt>オレンジ</dt>
+  <dd>橙色フルーツ</dd>
+</dl>
+
+注意するべきは、Definition 型のリスト内では Markdown 記法が使えないということです。例えば以下のように書いてはなりません。
+
+```html
+<dl>
+  <dt>リンゴ</dt>
+  <dd>とても **赤い** フルーツ</dd>
+</dl>
+```
+
+次のようになってしまいます。
+
+<dl>
+  <dt>リンゴ</dt>
+  <dd> とても **赤い** フルーツ </dd>
+</dl>
+
+Definition 型リスト内では Markdown 記法ではなくて、HTML タグを使って修飾しなければならないので、正しくは次のようになります。
+
+```html
+<dl>
+  <dt>リンゴ</dt>
+  <dd>とても<strong>赤い</strong>フルーツ</dd>
+</dl>
+```
+
+<dl>
+  <dt>リンゴ</dt>
+  <dd>
+    {" "}
+    とても<strong>赤い</strong>フルーツ
+  </dd>
+</dl>
+
+Markdown 記法と HTML タグの対応は次のようになっています。
+
+|    修飾    |    Markdown     |           HTML           |
+| :--------: | :-------------: | :----------------------: |
+|  ボールド  |     `** **`     |   `<strong></strong>`    |
+| イタリック |      `_ _`      |       `<em></em>`        |
+|   コード   | <code>``</code> |     `<code></code>`      |
+|   リンク   |  `[text](url)`  | `<a href="url">text</a>` |
+
+## Blockquotes - 引用
+
+> \> 文頭に>を置くことで引用になります。
+> \> 複数行にまたがる場合、改行のたびにこの記号を置く必要があります。
+> \> **引用の上下にはリストと同じく空行がないと正しく表示されません** > \> 引用の中に別の Markdown を使用することも可能です。
+
+> > これはネストされた引用です。
+
+## Horizontal rules - 水平線
+
+下記は全て水平線として表示されます
+
+> \* \* \* \*** > \*\*\*** > \- - -
+> \---------------------------------------
+
+## Links - リンク
+
+- \[リンクテキスト](URL "タイトル")
+  - タイトル付きのリンクを投稿できます。
+
+**例**
+
+> _Markdown:_ \[Qiita]\(http://qiita.com "Qiita")
+> _結果:_ [Qiita](http://qiita.com "Qiita")
+
+- \[リンクテキスト](URL)
+  - こちらはタイトル無しのリンクになります。
+
+**例**
+
+> _Markdown:_ \[Qiita]\(http://qiita.com)
+> _結果:_ [Qiita](http://qiita.com)
+
+- \[リンクテキスト]\[名前]
+- \[名前]:URL
+  - 同じ URL へのリンクを複数箇所に設定することができます
+
+**例**
+
+> _Markdown:_ > \[ここ]\[link-1] と \[この]\[link-1] リンクは同じになります。
+> \[link-1][\] も可能です。
+>
+> > \[link-1]:http://qiita.com/drafts/c686397e4a0f4f11683d
+>
+> _結果:_ > [ここ][link-1] と [この][link-1] リンクは同じになります。
+> [link-1][] も可能です。
+> [link-1]:http://qiita.com/drafts/c686397e4a0f4f11683d
+
+## Images - 画像埋め込み
+
+- \![代替テキスト]\(画像の URL)
+  - タイトル無しの画像を埋め込む
+- \![代替テキスト]\(画像の URL "画像タイトル")
+  - タイトル有りの画像を埋め込む
+
+**例**
+
+> _Markdown:_ \![Qiita]\(http://qiita.com/icons/favicons/public/apple-touch-icon.png "Qiita")
+> _結果:_ > ![Qiita](http://qiita.com/icons/favicons/public/apple-touch-icon.png "Qiita")
+
+## テーブル記法
+
+```
+| Left align | Right align | Center align |
+|:-----------|------------:|:------------:|
+| This       |        This |     This     |
+| column     |      column |    column    |
+| will       |        will |     will     |
+| be         |          be |      be      |
+| left       |       right |    center    |
+| aligned    |     aligned |   aligned    |
+```
+
+上記のように書くと，以下のように表示されます．
+
+| Left align | Right align | Center align |
+| :--------- | ----------: | :----------: |
+| This       |        This |     This     |
+| column     |      column |    column    |
+| will       |        will |     will     |
+| be         |          be |      be      |
+| left       |       right |    center    |
+| aligned    |     aligned |   aligned    |
+
+## 数式の挿入
+
+コードブロックの言語指定に "math" を指定することで TeX 記法を用いて数式を記述することができます。
+
+> \`\`\`math
+> \left( \sum*{k=1}^n a_k b_k \right)^{\!\!2} \leq
+> \left( \sum*{k=1}^n a*k^2 \right) \left( \sum*{k=1}^n b_k^2 \right)
+> \`\`\`
+
+```math
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+\left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+```
+
+`$2^3$` のように数式を "$" で挟むと行中に数式を埋め込むこともできます。
+
+> x^2 + y^2 = 1 をインライン表示すると $x^2 + y^2 = 1$ になります。
+
+ただしインライン数式の中でコントロールシンボル（`\{`のような、バックスラッシュの後に記号が続くもの）を使うと、後述のバックスラッシュによる Markdown のエスケープと衝突してしまいます。
+
+```
+$a = \{1, 2, 3\}$
+```
+
+> $a = \{1, 2, 3\}$
+
+なので次のように二つのバックスラッシュを使います。
+
+```
+$a = \\{1, 2, 3\\}$
+```
+
+> $a = \\{1, 2, 3\\}$
+
+## 目次(TOC)の自動挿入
+
+目次は記事内の見出しを元に自動生成し、右上に自動挿入されます。詳細は[目次機能の紹介記事](http://blog.qiita.com/post/77055935852/qiita-toc)をご覧ください。
+
+## 注釈
+
+本文中に `[^1]` のように文字列を記述することで、脚注へのリンクを表現できます。注釈内容は、同じく本文中に `[^1]: ...` というように記述します[^1]。
+
+[^1]: 注釈内容を記述する位置は、本文の途中でも末尾でも構いません。
+
+## 絵文字
+
+厳密には Markdown 記法の外ですが、`:` で囲って、絵文字を埋め込めます。
+
+**例**
+
+```
+\:kissing_closed_eyes: chu☆
+```
+
+> \:kissing_closed_eyes: chu☆
+
+絵文字チートシート
+http://www.emoji-cheat-sheet.com/
+
+## その他
+
+バックスラッシュ[\\]を Markdown の前に挿入することで、Markdown をエスケープ(無効化)することができます。
+
+**例**
+
+> \# H1
+> エスケープされています
+
+また本文では一部の HTML タグも利用可能です。
+
+**Syntax highlighting**
+
+```tsx
+import {
+  Box,
+  chakra,
+  Kbd,
+  HTMLChakraProps,
+  Alert,
+  useColorModeValue,
+} from "@chakra-ui/react"
+import { MDXProviderComponentsProp } from "@mdx-js/react"
+import React from "react"
+import Highlight, { defaultProps } from "prism-react-renderer"
+
+const Table = (props: HTMLChakraProps<"table">) => (
+  <chakra.div overflowX="auto">
+    <chakra.table textAlign="left" mt="32px" width="full" {...props} />
+  </chakra.div>
+)
+
+const THead = (props: HTMLChakraProps<"th">) => (
+  <chakra.th
+    bg={useColorModeValue("gray.50", "whiteAlpha.100")}
+    fontWeight="semibold"
+    p={2}
+    fontSize="sm"
+    {...props}
+  />
+)
+
+const TData = (props: HTMLChakraProps<"td">) => (
+  <chakra.td
+    p={2}
+    borderTopWidth="1px"
+    borderColor="inherit"
+    fontSize="sm"
+    whiteSpace="normal"
+    {...props}
+  />
+)
+
+const LinkedHeading = (props: HTMLChakraProps<"h2">) => (
+  <chakra.h2 data-group="" css={{ scrollMarginBlock: "6.875rem" }} {...props}>
+    <span className="content">{props.children}</span>
+    {props.id && (
+      <chakra.a
+        aria-label="anchor"
+        color="teal.500"
+        fontWeight="normal"
+        outline="none"
+        _focus={{ opacity: 1, boxShadow: "outline" }}
+        opacity={0}
+        _groupHover={{ opacity: 1 }}
+        ml="0.375rem"
+        href={`#${props.id}`}
+      >
+        #
+      </chakra.a>
+    )}
+  </chakra.h2>
+)
+
+const InlineCode = (props: any) => (
+  <chakra.code
+    apply="mdx.code"
+    color={useColorModeValue("cyan.600", "cyan.200")}
+    fontFamily="mono"
+    {...props}
+  />
+)
+
+export const PostRenderer: MDXProviderComponentsProp = {
+  h1: props => <chakra.h1 apply="mdx.h1" {...props} />,
+  h2: props => <LinkedHeading apply="mdx.h2" {...props} />,
+  h3: props => <LinkedHeading apply="mdx.h3" {...props} />,
+  h4: props => <LinkedHeading as="h4" apply="mdx.h4" {...props} />,
+  hr: props => <chakra.hr apply="mdx.hr" {...props} />,
+  strong: props => <Box as="strong" fontWeight="semibold" {...props} />,
+  inlineCode: InlineCode,
+  pre: props => <chakra.div my="2em" borderRadius="sm" {...props} />,
+  kbd: Kbd,
+  code: CodeBlock,
+  table: Table,
+  th: THead,
+  td: TData,
+  a: React.forwardRef((props: any, ref: any) => (
+    <chakra.a ref={ref} apply="mdx.a" {...props} />
+  )),
+  p: props => <chakra.p apply="mdx.p" {...props} />,
+  ul: props => <chakra.ul apply="mdx.ul" {...props} />,
+  ol: props => <chakra.ol apply="mdx.ul" {...props} />,
+  li: props => <chakra.li pb="4px" {...props} />,
+  blockquote: props => (
+    <Alert
+      mt="4"
+      role="none"
+      variant="left-accent"
+      as="blockquote"
+      rounded="4px"
+      my="1.5rem"
+      colorScheme="gray"
+      {...props}
+    />
+  ),
+}
+```

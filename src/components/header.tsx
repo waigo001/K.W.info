@@ -30,126 +30,122 @@ const HeaderContent = () => {
 
   const padding = useBreakpointValue({ base: "3", md: "6" })
   return (
-    <>
-      <Flex
-        w="100%"
-        h="100%"
-        px={padding}
-        align="center"
-        justify="space-between"
-        gridGap={3}
+    <Flex
+      w="100%"
+      h="100%"
+      px={padding}
+      align="center"
+      justify="space-between"
+      gridGap={3}
+    >
+      <IconButton
+        display={{ base: "flex", sm: "none" }}
+        aria-label="nav-drawer-open"
+        variant="ghost"
+        isRound
+        onClick={mobileNav.onOpen}
+        icon={<FaBars />}
+      />
+
+      <Drawer
+        isOpen={mobileNav.isOpen}
+        placement="top"
+        onClose={mobileNav.onClose}
+        trapFocus={false}
       >
-        <IconButton
-          display={{ base: "flex", sm: "none" }}
-          aria-label="nav-drawer-open"
-          variant="ghost"
-          isRound
-          onClick={mobileNav.onOpen}
-          icon={<FaBars />}
-        />
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader>
+            <Title />
+          </DrawerHeader>
 
-        <Drawer
-          isOpen={mobileNav.isOpen}
-          placement="top"
-          onClose={mobileNav.onClose}
-          trapFocus={false}
-        >
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHeader>
-              <Title />
-            </DrawerHeader>
+          <DrawerBody>
+            <nav>
+              <UnorderedList spacing="0.25rem" listStyleType="none">
+                <Divider />
+                <ListItem>
+                  <Link to="/blog">
+                    <Button
+                      leftIcon={<FaCalendarDay />}
+                      variant="ghost"
+                      w="100%"
+                      rounded="full"
+                      colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
+                      justifyContent="left"
+                      onClick={mobileNav.onClose}
+                    >
+                      Blog
+                    </Button>
+                  </Link>
+                </ListItem>
+                <Divider />
+                <ListItem>
+                  <Link to="/about">
+                    <Button
+                      variant="ghost"
+                      leftIcon={<FaInfoCircle />}
+                      w="100%"
+                      rounded="full"
+                      colorScheme={useMatch("/about" + "/*") ? "cyan" : "gray"}
+                      justifyContent="left"
+                      onClick={mobileNav.onClose}
+                    >
+                      About
+                    </Button>
+                  </Link>
+                </ListItem>
+              </UnorderedList>
+            </nav>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
 
-            <DrawerBody>
-              <nav>
-                <UnorderedList spacing="0.25rem" listStyleType="none">
-                  <Divider />
-                  <ListItem>
-                    <Link to="/blog">
-                      <Button
-                        leftIcon={<FaCalendarDay />}
-                        variant="ghost"
-                        w="100%"
-                        rounded="full"
-                        colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
-                        justifyContent="left"
-                        onClick={mobileNav.onClose}
-                      >
-                        Blog
-                      </Button>
-                    </Link>
-                  </ListItem>
-                  <Divider />
-                  <ListItem>
-                    <Link to="/about">
-                      <Button
-                        variant="ghost"
-                        leftIcon={<FaInfoCircle />}
-                        w="100%"
-                        rounded="full"
-                        colorScheme={
-                          useMatch("/about" + "/*") ? "cyan" : "gray"
-                        }
-                        justifyContent="left"
-                        onClick={mobileNav.onClose}
-                      >
-                        About
-                      </Button>
-                    </Link>
-                  </ListItem>
-                </UnorderedList>
-              </nav>
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
+      <Title fontSize="3xl" />
 
-        <Title fontSize="3xl" />
-
-        <Spacer />
-        <Flex display={{ base: "none", sm: "flex" }} align="center" gridGap="2">
-          <Link to="/blog">
-            <Button
-              leftIcon={<FaCalendarDay />}
-              colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
-              variant="ghost"
-            >
-              Blog
-            </Button>
-          </Link>
-          <Link to="/about">
-            <Button
-              leftIcon={<FaInfoCircle />}
-              colorScheme={useMatch("/about" + "/*") ? "cyan" : "gray"}
-              variant="ghost"
-            >
-              About
-            </Button>
-          </Link>
-        </Flex>
+      <Spacer />
+      <Flex display={{ base: "none", sm: "flex" }} align="center" gridGap="2">
+        <Link to="/blog">
+          <Button
+            leftIcon={<FaCalendarDay />}
+            colorScheme={useMatch("/blog" + "/*") ? "cyan" : "gray"}
+            variant="ghost"
+          >
+            Blog
+          </Button>
+        </Link>
+        <Link to="/about">
+          <Button
+            leftIcon={<FaInfoCircle />}
+            colorScheme={useMatch("/about" + "/*") ? "cyan" : "gray"}
+            variant="ghost"
+          >
+            About
+          </Button>
+        </Link>
       </Flex>
-    </>
+    </Flex>
   )
 }
 
 const Header = (props: HTMLChakraProps<"header">) => {
   const ref = React.useRef<HTMLHeadingElement>(null)
   const bg = useColorModeValue("white", "gray.800")
+  const shadow = useColorModeValue("md", "xl")
 
   return (
     <chakra.header
       pos="sticky"
-      transition="box-shadow 0.2s, background-color 0.2s"
       ref={ref}
       zIndex="3"
       width="full"
       top="0"
       left="0"
       right="0"
-      shadow="md"
+      boxShadow={shadow}
       bg={bg}
       {...props}
     >
-      <chakra.div height="4em" mx="auto" maxW="8xl">
+      <chakra.div height="4rem" mx="auto" maxW="8xl">
         <HeaderContent />
       </chakra.div>
     </chakra.header>

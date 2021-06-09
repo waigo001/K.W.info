@@ -10,38 +10,52 @@ import {
   Text,
   Tooltip,
   useClipboard,
+  useColorModeValue,
   Wrap,
 } from "@chakra-ui/react"
 import { FaClipboard, FaTags, FaTwitter } from "react-icons/fa"
 
-const BlogCard: React.FC<{
-  step: Pick<
-    GatsbyTypes.MicrocmsBlogs,
-    "title" | "slug" | "body" | "description" | "publishedAt" | "updatedAt"
-  > & {
-    readonly tags: GatsbyTypes.Maybe<
-      readonly GatsbyTypes.Maybe<
-        Pick<GatsbyTypes.MicrocmsBlogsTags, "title" | "slug">
-      >[]
+type Props = {
+  node: Pick<GatsbyTypes.Mdx, "id" | "slug"> & {
+    readonly frontmatter: GatsbyTypes.Maybe<
+      Pick<
+        GatsbyTypes.MdxFrontmatter,
+        "title" | "tags" | "createdAt" | "updatedAt"
+      >
     >
   }
-  url: string | undefined
-}> = ({ step, url }) => {
+  url?: string
+}
+
+const BlogCard: React.VFC<Props> = ({ node, url }) => {
   const { hasCopied, onCopy } = useClipboard(
-    url ? url + `/blog/` + step.slug : ""
+    url ? url + `/blog/` + node.slug : ""
   )
 
+  const bg = useColorModeValue("white", "gray.800")
+  const shadow = useColorModeValue("md", "xl")
+
   return (
-    <Flex direction="column" boxShadow="xs" p="4" rounded="lg" h="100%">
-      <PostTime updatedAt={step.updatedAt} publishedAt={step.publishedAt} />
+    <Flex
+      direction="column"
+      bg={bg}
+      boxShadow={shadow}
+      p="4"
+      rounded="lg"
+      h="100%"
+    >
+      <PostTime
+        updatedAt={node.frontmatter?.updatedAt}
+        publishedAt={node.frontmatter?.createdAt}
+      />
       <Flex my="2">
         <Text
           as={Link}
-          to={`/blog/${step.slug}`}
+          to={`/blog/${node.slug}`}
           fontSize="xl"
-          fontWeight="bold"
+          fontWeight="semibold"
         >
-          {step.title}
+          {node.frontmatter?.title}
         </Text>
       </Flex>
       <Flex align="center" gridGap="2" my="2">
@@ -49,8 +63,8 @@ const BlogCard: React.FC<{
         <Text fontSize="sm">タグ</Text>
       </Flex>
       <Wrap spacing="2" my="2">
-        {step.tags !== undefined ? (
-          step.tags.map(key => <Tag props={key} key={key?.title} />)
+        {node.frontmatter?.tags ? (
+          node.frontmatter?.tags.map(key => <Tag props={key} key={key} />)
         ) : (
           <></>
         )}
@@ -63,10 +77,10 @@ const BlogCard: React.FC<{
             `http://twitter.com/share?url=` +
             url +
             `/blog/` +
-            step.slug +
+            node.slug +
             `&hashtags=kwinfo` +
             `&text=` +
-            step.title
+            node.frontmatter?.title
           }
           isExternal
         >

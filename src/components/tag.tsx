@@ -1,19 +1,18 @@
 import React from "react"
 import { Tag as ChakraTag, TagLabel } from "@chakra-ui/react"
 
-const Tag: React.FC<{
-  props:
-    | GatsbyTypes.Maybe<Pick<GatsbyTypes.MicrocmsBlogsTags, "title" | "slug">>
-    | undefined
-}> = ({ props }) => {
+type Props = {
+  props?: string
+}
+
+const Tag: React.FC<Props> = ({ props }) => {
   let contents = <></>
-  if (props !== undefined) {
-    if (props.slug !== undefined && props.title !== undefined)
-      contents = (
-        <ChakraTag key={props.slug} borderRadius="full" variant="outline">
-          <TagLabel> {props.title}</TagLabel>
-        </ChakraTag>
-      )
+  if (props) {
+    contents = (
+      <ChakraTag key={props} borderRadius="full" variant="outline">
+        <TagLabel> {props}</TagLabel>
+      </ChakraTag>
+    )
   }
   return contents
 }

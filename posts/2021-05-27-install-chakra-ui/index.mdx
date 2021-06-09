@@ -1,0 +1,45 @@
+---
+title: "Chakra-UIをGatsby.jsに導入した"
+tags: ["Chakra-UI"]
+status: "private"
+createdAt: "2021-05-27"
+updatedAt: "2021-05-27"
+---
+
+## まえがき
+
+Chakra-UI を自分のブログに導入したので、経緯を記載するよ。
+
+## インストール
+
+以下コマンドでプラグインをインストールする。
+
+```bash:bash
+$ npm install @chakra-ui/gatsby-plugin
+```
+
+## gatsby-config.js 設定
+
+`gatsby-config.js`の設定は以下の通り。  
+ブラウザ毎の style 差分をなくすため、resetCSS は有効にする。
+
+```js:gatsby-config.js {9,10}
+module.exports = {
+  // ...
+
+  plugins: [
+    // ...
+
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
+      options: {
+        resetCSS: true,
+      },
+    },
+  ],
+}
+```
+
+## Chakra-UI のカスタマイズ
+
+`src/@chakra-ui/gatsby-plugin/theme.js`を作成すると、既存の@chakra-ui のプラグインの theme が上書きされる。

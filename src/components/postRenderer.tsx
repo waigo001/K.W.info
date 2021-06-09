@@ -1,163 +1,108 @@
-import React from "react"
-import rehypeReact from "rehype-react"
-import unified from "unified"
-
-import parser from "rehype-parse"
-import rehypeSanitize from "rehype-sanitize"
-// @ts-ignore
-import github from "hast-util-sanitize/lib/github"
-import merge from "deepmerge"
 import {
-  Heading,
-  Text,
-  TypographyProps,
-  UnorderedList,
-  ListItem,
-  OrderedList,
-  Link,
-  Icon,
-  Divider,
-  useColorModeValue,
   Box,
+  chakra,
+  Kbd,
+  HTMLChakraProps,
+  Alert,
+  useColorModeValue,
 } from "@chakra-ui/react"
-import { FaExternalLinkAlt } from "react-icons/fa"
+import { MDXProviderComponentsProp } from "@mdx-js/react"
+import React from "react"
+import CodeBlock from "./codeBlock"
 
-const schema = merge(github, { attributes: { blockquote: ["className"] } })
-
-const processor = unified()
-  .use(parser, { fragment: true })
-  .use(rehypeReact, {
-    createElement: React.createElement,
-    components: {
-      h1: ({ children, ...props }: any) => {
-        return (
-          <>
-            <Heading
-              as="h1"
-              size="2xl"
-              fontWeight="600"
-              {...props}
-              mt="6"
-              mb="1"
-            >
-              {children}
-            </Heading>
-            <Divider mt="1" mb="4" />
-          </>
-        )
-      },
-      h2: ({ children, ...props }: any) => {
-        return (
-          <>
-            <Heading
-              as="h2"
-              fontSize="1.5em"
-              fontWeight="600"
-              {...props}
-              mt="6"
-              mb="1"
-            >
-              {children}
-            </Heading>
-            <Divider mt="1" mb="4" />
-          </>
-        )
-      },
-      h3: (props: TypographyProps) => {
-        return (
-          <Heading
-            as="h3"
-            fontSize="1.25em"
-            fontWeight="600"
-            {...props}
-            mt="6"
-            mb="4"
-          />
-        )
-      },
-      h4: (props: TypographyProps) => {
-        return (
-          <Heading
-            as="h4"
-            fontSize="1em"
-            fontWeight="600"
-            {...props}
-            mt="6"
-            mb="4"
-          />
-        )
-      },
-      h5: (props: TypographyProps) => {
-        return (
-          <Heading
-            as="h5"
-            fontSize=".875em"
-            fontWeight="600"
-            {...props}
-            mt="6"
-            mb="4"
-          />
-        )
-      },
-      h6: (props: TypographyProps) => {
-        return (
-          <Heading
-            as="h6"
-            fontSize=".85em"
-            fontWeight="600"
-            {...props}
-            mt="6"
-            mb="4"
-          />
-        )
-      },
-      ul: (props: TypographyProps) => {
-        return <UnorderedList my="1" {...props} />
-      },
-      ol: (props: TypographyProps) => {
-        return <OrderedList my="1" {...props} />
-      },
-      li: ListItem,
-      a: ({ children, ...props }: any) => {
-        const linkColor = useColorModeValue("cyan.700", "cyan.300")
-
-        return (
-          <Link mx="1" {...props}>
-            <Text as="ins" color={linkColor}>
-              {children} <Icon as={FaExternalLinkAlt} mx="1" />
-            </Text>
-          </Link>
-        )
-      },
-      p: (props: TypographyProps) => {
-        return <Text {...props} mb="4" />
-      },
-      blockquote: ({ children, ...props }: any) => {
-        const color = useColorModeValue("gray.500", "gray.400")
-
-        return (
-          <Box
-            as="blockquote"
-            {...props}
-            px="1em"
-            color={color}
-            borderLeftWidth=".25em"
-            borderLeftStyle="solid"
-            borderLeftColor={color}
-          >
-            {children}
-          </Box>
-        )
-      },
-    },
-  })
-  .use(rehypeSanitize, schema)
-
-const render = (html: string) =>
-  processor.processSync(html).result as React.ReactElement
-
-const PostRenderer: React.FC<{ body?: string }> = ({ body = "" }) => (
-  <div>{render(body)}</div>
+const Table = (props: HTMLChakraProps<"table">) => (
+  <chakra.div overflowX="auto">
+    <chakra.table textAlign="left" mt="32px" width="full" {...props} />
+  </chakra.div>
 )
 
-export default PostRenderer
+const THead = (props: HTMLChakraProps<"th">) => (
+  <chakra.th
+    bg={useColorModeValue("gray.50", "whiteAlpha.100")}
+    fontWeight="semibold"
+    p={2}
+    fontSize="sm"
+    {...props}
+  />
+)
+
+const TData = (props: HTMLChakraProps<"td">) => (
+  <chakra.td
+    p={2}
+    borderTopWidth="1px"
+    borderColor="inherit"
+    fontSize="sm"
+    whiteSpace="normal"
+    {...props}
+  />
+)
+
+const LinkedHeading = (props: HTMLChakraProps<"h2">) => {
+  const color = useColorModeValue("cyan.600", "cyan.400")
+
+  return (
+    <chakra.h2 data-group="" css={{ scrollMarginTop: "6rem" }} {...props}>
+      <span className="content">{props.children}</span>
+      {props.id && (
+        <chakra.a
+          aria-label="anchor"
+          color={color}
+          fontWeight="normal"
+          outline="none"
+          _focus={{ opacity: 1, boxShadow: "outline" }}
+          opacity={0}
+          _groupHover={{ opacity: 1 }}
+          ml="0.375rem"
+          href={`#${props.id}`}
+        >
+          #
+        </chakra.a>
+      )}
+    </chakra.h2>
+  )
+}
+
+const InlineCode = (props: any) => (
+  <chakra.code
+    apply="mdx.code"
+    color={useColorModeValue("cyan.700", "cyan.200")}
+    fontFamily="mono"
+    {...props}
+  />
+)
+
+export const PostRenderer: MDXProviderComponentsProp = {
+  h1: props => <chakra.h1 apply="mdx.h1" {...props} />,
+  h2: props => <LinkedHeading apply="mdx.h2" {...props} />,
+  h3: props => <LinkedHeading apply="mdx.h3" {...props} />,
+  h4: props => <LinkedHeading as="h4" apply="mdx.h4" {...props} />,
+  hr: props => <chakra.hr apply="mdx.hr" {...props} />,
+  strong: props => <Box as="strong" fontWeight="semibold" {...props} />,
+  inlineCode: InlineCode,
+  pre: props => <chakra.div my="2em" borderRadius="sm" {...props} />,
+  kbd: Kbd,
+  code: CodeBlock,
+  table: Table,
+  th: THead,
+  td: TData,
+  a: React.forwardRef((props: any, ref: any) => {
+    const color = useColorModeValue("cyan.600", "cyan.400")
+    return <chakra.a ref={ref} apply="mdx.a" {...props} color={color} />
+  }),
+  p: props => <chakra.p apply="mdx.p" {...props} />,
+  ul: props => <chakra.ul apply="mdx.ul" {...props} />,
+  ol: props => <chakra.ol apply="mdx.ul" {...props} />,
+  li: props => <chakra.li pb="4px" {...props} />,
+  blockquote: props => (
+    <Alert
+      mt="4"
+      role="none"
+      variant="left-accent"
+      as="blockquote"
+      rounded="4px"
+      my="1.5rem"
+      colorScheme="gray"
+      {...props}
+    />
+  ),
+}

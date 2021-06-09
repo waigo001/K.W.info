@@ -1,49 +1,48 @@
-import { Container, Heading } from "@chakra-ui/layout"
-import { Image, Flex, Box } from "@chakra-ui/react"
-import { graphql, PageProps } from "gatsby"
+import { Container, Heading, ListItem, UnorderedList } from "@chakra-ui/layout"
+import { Flex, chakra } from "@chakra-ui/react"
+import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import Layout from "../components/layout/blog"
-import PostRenderer from "../components/postRenderer"
 import SEO from "../components/seo"
 
-export const query = graphql`
-  query AboutPage {
-    microcmsAbout {
-      body
-      description
-      updatedAt
-      user
-      image {
-        url
-      }
-    }
-  }
-`
-const AboutPage: React.FC<PageProps<GatsbyTypes.AboutPageQuery>> = ({
-  data,
-}) => {
+const AboutPage: React.VFC = () => {
   return (
     <Layout>
-      <SEO title="About" description={data.microcmsAbout?.description} />
+      <SEO title="About" description="K.W.infoについて" />
       <Container maxW="md">
-        <Flex justify="center">
-          <Image
-            alt="K.W."
-            src={data.microcmsAbout?.image?.url}
-            my="4"
-            w="60%"
-            h="60%"
-          />
+        <Flex justify="center" my="6" alignContent="center">
+          <Flex maxW="60%">
+            <StaticImage
+              src="../images/favicon.png"
+              alt="User Image"
+              placeholder="blurred"
+            />
+          </Flex>
         </Flex>
         <Heading
           as="h1"
-          fontSize="4xl"
+          fontSize="6xl"
           fontFamily="Josefin Sans"
           textAlign="center"
         >
-          {data.microcmsAbout?.user}
+          K.W.
         </Heading>
-        <PostRenderer body={data.microcmsAbout?.body} />
+        <Heading as="h2" apply="mdx.h2">
+          K.W.について
+        </Heading>
+        <UnorderedList>
+          <ListItem>社会人</ListItem>
+          <ListItem>カメラ</ListItem>
+          <ListItem>コーヒー好き</ListItem>
+          <ListItem>パソコン好き</ListItem>
+          <ListItem>Vue.jsしか触れません(と思ってた)</ListItem>
+        </UnorderedList>
+        <Heading as="h2" apply="mdx.h2">
+          このブログについて
+        </Heading>
+        <chakra.p apply="mdx.p">
+          個人的なブログです。ただひたすら徒然なるようにひぐらししていいきます。
+        </chakra.p>
       </Container>
     </Layout>
   )
