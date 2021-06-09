@@ -2,8 +2,8 @@ import { Container, VStack } from "@chakra-ui/react"
 
 import React, { ReactNode } from "react"
 import { use100vh } from "react-div-100vh"
-import Footer from "../footer"
-import Header from "../header"
+import Footer from "./footer"
+import Header from "./header"
 
 type Props = {
   children: ReactNode

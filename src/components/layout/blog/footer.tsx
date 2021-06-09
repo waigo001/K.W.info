@@ -9,8 +9,8 @@ import {
   useBreakpointValue,
   Box,
 } from "@chakra-ui/react"
-import Title from "./title"
-import IconLink from "./iconLink"
+import Title from "../../title"
+import IconLink from "../../iconLink"
 import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const FooterContent = () => {

@@ -14,9 +14,9 @@ import {
 } from "react-icons/fa"
 import { Link } from "gatsby"
 
-import Title from "../title"
+import Title from "../../title"
 import { use100vh } from "react-div-100vh"
-import IconLink from "../iconLink"
+import IconLink from "../../iconLink"
 
 type Props = {
   children: ReactNode

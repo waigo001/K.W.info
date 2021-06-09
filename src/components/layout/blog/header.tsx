@@ -23,7 +23,7 @@ import { Link } from "gatsby"
 import { FaBars, FaCalendarDay, FaInfoCircle } from "react-icons/fa"
 import { useMatch } from "@reach/router"
 
-import Title from "./title"
+import Title from "../../title"
 
 const HeaderContent = () => {
   const mobileNav = useDisclosure()
