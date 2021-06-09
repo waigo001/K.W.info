@@ -1,0 +1,113 @@
+---
+title: Typescript + Gatsby + Netlify + microCMS でJAMStackなブログを作った件（技術選定編）
+tags: ["Gatsby", "React", "microCMS", "Typescript"]
+status: "private"
+createdAt: "2020-12-23T03:04:02.039Z"
+updatedAt: "2021-01-03T03:51:26.354Z"
+---
+
+## 概要
+
+Typescript + Gatsby + Netlify + microCMS で JAMStack なブログを作成しました。  
+個人的備忘録程度なので内容は大概適当であることを予めご了承ください。  
+今回は技術選定編です。
+
+## なぜ変更したか？
+
+これまで Vue.js (Quasar) + Firebase + Contentful でブログを作成していたのですが
+
+- SEO 対策で SSR するために Firebase を利用したが、Firebase Cloud Functions が遅い
+- **Quasar の情報（とくに日本語）が少ない**
+- Vue と Typescript の相性が悪すぎる
+
+この 3 点が懸念事項であり、初めて作ったものの不満しかありませんでした。
+
+### Firebase について
+
+Firebase では、Firebase Hosting を用いサイト公開を行うことができますが、SSR でホスティングするためには Firebase Cloud Functions と連携して実施する必要があります。
+
+> [Nuxt.js と Firebase で SPA×SSR×PWA× サーバーレスを実現する](https://inside.dmm.com/entry/2018/04/10/nuxt-firebase)
+
+また、Firebase Cloud Functions はいわゆる課金ユーザ（[Blaze プラン](https://firebase.google.com/pricing?hl=ja)）でないと外部からの接続ができず、一定の通信量を超えると課金されてしまうことも懸念事項でした。
+
+### Quasar について
+
+[quasar](https://quasar.dev/introduction-to-quasar) というのは Vue の UI ライブラリ（マテリアルデザイン踏襲）の一種なのですが、
+UI に限らず「Quasar を使えば iOS のアプリまで作れる」スゴイやつです。ただし、認知度が少なく、同様のマテリアルデザインの UI ライブラリである
+Vuetify と比べると、困ったときの情報が少ないというのが難点でした。
+
+### TypeScript について
+
+フロントエンド界隈では、TypeScript を使った型安全な開発が主流です。  
+私自身もこのビッグウェーブに乗るため Typescript を本格導入しようとしましたが、現状の Vue2.x であると Typescript との相性が悪く（特に Vuex）、Typescript の恩恵を十分に得られていないように感じられました。  
+なおかつ Vue のパフォーマンスも React に劣るため、これを期に React へ乗り換え、ついでに Typescript で開発してやろう！と思った次第です。
+
+## 技術選定
+
+ブログは JAMStack なものが主流だろう、ということで SSG（スタティックサイトジェネレーター）なブログを作成することとしました。JAMStack に関してはこちらがわかりやすいと思います。
+
+> [Jamstack って何なの？何がいいの？](https://qiita.com/ozaki25/items/4075d03278d1fb51cc37)
+
+JAMStack には
+
+- ヘッドレス CMS
+- SSG
+- ホスティング先
+
+が重要となります。
+
+### ヘッドレス CMS
+
+解説が難しいのでこちらをご覧ください。
+
+> [ヘッドレス CMS とは何か？従来 CMS との違いやメリデメを解説！](https://microcms.io/blog/what-is-headlesscms/)
+
+端的に言えば、コンテンツのみを API で提供する（サイトのテンプレート自体は自前で作成する）CMS です。
+従来の CMS の例としては Wordpress やはてなブログ等ですね。
+ヘッドレス CMS には有名どころとして以下があります。
+
+#### Contentful
+
+超有名なヘッドレス CMS です。ただし海外製なので日本語サポートはありません。
+（コンテンツは日本語で書けます。）
+
+#### microCMS
+
+日本製ヘッドレス CMS です。とてもシンプルですがコンテンツの内容が markdown で配信できません。タグ付きなので配信には工夫が必要です。
+
+#### strapi
+
+上記 2 つはクラウド型ですが、strapi は自前でサーバを立てて運用するタイプ（self-hosted）のヘッドレス CMS です。オフライン環境で使用する場合はこれ 1 択ですが、ろくにサーバも立ててないので今回は見送りました。
+その他様々なヘッドレス CMS がありますが、今回は [microCMS](https://microcms.io/) を利用することにしました。
+日本製ヘッドレス CMS のため記事やサポートが多い事もありますが、画像の編集機能が豊富であることが最終の決め手でした。詳細は以下をご覧ください。
+
+> [microCMS の画像編集機能](https://microcms.io/blog/microcms-with-image-editing/)
+
+### SSG(Static Site Generator)
+
+SSG(Static Site Generator)、静的サイトジェネレータは、文字通り静的な（Javascript を用いた動的なものとは異なる）サイトを生成するソフトウェアのことを指します。
+そもそもサイトの種類としては大まかに 3 つほどあり、SPA(Single Page Application)、SSR(Server Side Rendering)、そして SSG です。
+違いについてはこちらを参照ください
+
+> [Client Side Rendering（SPA）・SSR・SSG を整理してみた](https://serip39.hatenablog.com/entry/2020/08/23/225000)
+
+SPA は SEO 対策的に NG…SSR は経験上めんどくさい(Heroku でできるけど…) というのもあり、SSG にしました。
+SSG においても種類があり、Vue ならば VuePress が一番有名（最近では GridSome などがあるみたい）ですが、
+カスタマイズが大変そうなのと、Vue と Typescript との相性が最悪なので、
+これを期に React へ乗り換え、有名な Gatsby を使用してみることにしました。
+SSG の種類についてはこのサイトを参考にしました。
+
+> [Static Site Generators](https://jamstack.org/generators/)
+
+### ホスティング先
+
+有名なホスティング先としては、Cloudflare、AWS、Github Pages、Netlify などがあります。
+少し前であれば自前でサーバをレンタルし、（さくらの VPS など）Apache を設定してなどが必要でしたが、
+今はホスティングのみであればホスティングサービスを利用するほうがセキュリティ含めて楽です。
+今回は有名どころである、[Netlify](https://www.netlify.com/) を利用することにしました。
+
+## まとめ
+
+つらつらと書いてきましたが、タイトルどおりです。
+
+次の記事にて具体的な作成方法について記載していきます。

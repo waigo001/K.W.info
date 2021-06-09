@@ -1,0 +1,25 @@
+---
+title: "SafariでScrollがずれる問題"
+tags: ["Safari", "Webkit"]
+status: "private"
+createdAt: "2021-06-05"
+updatedAt: "2021-06-05"
+---
+
+## 概要
+
+Header を CSS で`position:sticky`に設定している場合、Safari 等の
+Webkit ブラウザではスクロールがズレる場合がある。
+
+例えば、chakra-ui での場合…
+
+Safari で Heading のスクロールがずれる問題について、色々調べた結果
+以下の結論にたどり着きました。
+
+## 結論
+
+css で以下の設定をする
+
+```css
+scroll-margin-top: 6rem;
+```

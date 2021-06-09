@@ -19,8 +19,25 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: `posts`,
+        path: `${__dirname}/posts`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-image",
+      options: {
+        defaults: {
+          formats: ["webp"],
+        },
+      },
+    },
     "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
+    {
+      resolve: "gatsby-plugin-sharp",
+    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -33,35 +50,18 @@ module.exports = {
         icon: "src/images/favicon.jpg",
       },
     },
-    {
-      resolve: "gatsby-source-microcms",
-      options: {
-        apiKey: process.env.MICROCMS_API_KEY,
-        serviceId: process.env.MICROCMS_ENDPOINT,
-        apis: [
-          {
-            endpoint: "blogs",
-            format: "list",
-          },
-          {
-            endpoint: "about",
-            format: "list",
-          },
-        ],
-      },
-    },
+
     {
       resolve: "gatsby-plugin-typegen",
       options: {
         emitSchema: {
-          "src/__generated__/gatsby-introspection.json": true,
+          "src/__generated__/gatsby-schema.graphql": true,
         },
+        outputPath: "src/__generated__/gatsby-types.d.ts",
       },
     },
     "gatsby-plugin-twitter",
     "gatsby-plugin-typescript",
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
     "gatsby-plugin-offline",
     "gatsby-plugin-sitemap",
     {
@@ -72,6 +72,22 @@ module.exports = {
       options: {
         resetCSS: true,
       },
+    },
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              icon: false,
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-emotion",
     },
   ],
 }

@@ -15,7 +15,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "12.x"
+          node-version: "16.x"
 
       - name: Cache node_modules
         uses: actions/cache@v2
@@ -27,12 +27,10 @@ jobs:
 
       - name: Build
         run: |
-          npm ci
+          npm i
           npm run build
         env:
           BASE_URL: ${{secrets.BASE_URL}}
-          MICROCMS_API_KEY: ${{secrets.MICROCMS_API_KEY}}
-          MICROCMS_ENDPOINT: ${{secrets.MICROCMS_ENDPOINT}}
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
