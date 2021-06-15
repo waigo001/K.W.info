@@ -25,7 +25,11 @@ import { useMatch } from "@reach/router"
 
 import Title from "../../title"
 
-const HeaderContent = () => {
+type Props = {
+  toc?: any
+}
+
+const HeaderContent: React.VFC<Props> = data => {
   const mobileNav = useDisclosure()
 
   const padding = useBreakpointValue({ base: "3", md: "6" })
@@ -127,7 +131,7 @@ const HeaderContent = () => {
   )
 }
 
-const Header = (props: HTMLChakraProps<"header">) => {
+const Header = (props: HTMLChakraProps<"header"> & Props) => {
   const ref = React.useRef<HTMLHeadingElement>(null)
   const bg = useColorModeValue("white", "gray.800")
   const shadow = useColorModeValue("md", "xl")
@@ -146,7 +150,7 @@ const Header = (props: HTMLChakraProps<"header">) => {
       {...props}
     >
       <chakra.div height="4rem" mx="auto" maxW="8xl">
-        <HeaderContent />
+        <HeaderContent toc={props.toc} />
       </chakra.div>
     </chakra.header>
   )

@@ -7,14 +7,15 @@ import Header from "./header"
 
 type Props = {
   children: ReactNode
+  toc?: any
 }
 
-const indexPage: React.VFC<Props> = ({ children }: Props) => {
+const indexPage: React.VFC<Props> = ({ children, toc }: Props) => {
   const height = use100vh()
 
   return (
     <VStack minH={height ? height : "100vh"}>
-      <Header />
+      <Header toc={toc} />
 
       <Container as="main" maxW="5xl" flex="1">
         {children}
