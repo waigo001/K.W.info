@@ -17,6 +17,7 @@ import {
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
+  Text,
 } from "@chakra-ui/react"
 import { HTMLChakraProps } from "@chakra-ui/system"
 import { Link } from "gatsby"
@@ -24,12 +25,13 @@ import { FaBars, FaCalendarDay, FaInfoCircle } from "react-icons/fa"
 import { useMatch } from "@reach/router"
 
 import Title from "../../title"
+import { TableOfContents, TOC } from "../../tableOfContents"
 
 type Props = {
-  toc?: any
+  toc?: TOC
 }
 
-const HeaderContent: React.VFC<Props> = data => {
+const HeaderContent: React.VFC<Props> = ({ toc }) => {
   const mobileNav = useDisclosure()
 
   const padding = useBreakpointValue({ base: "3", md: "6" })
@@ -99,6 +101,13 @@ const HeaderContent: React.VFC<Props> = data => {
                   </Link>
                 </ListItem>
               </UnorderedList>
+              <Divider my="2" />
+              <Text fontWeight="black" my="2">
+                目次
+              </Text>
+              {toc && (
+                <TableOfContents toc={toc} onItemClick={mobileNav.onClose} />
+              )}
             </nav>
           </DrawerBody>
         </DrawerContent>
