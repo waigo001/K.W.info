@@ -100,11 +100,7 @@ const HeaderContent: React.VFC<Props> = ({ toc }) => {
                     </Button>
                   </Link>
                 </ListItem>
-              </UnorderedList>
-              <Divider my="2" />
-              <Text fontWeight="black" my="2">
-                目次
-              </Text>
+              </UnorderedList>             
               {toc && (
                 <TableOfContents toc={toc} onItemClick={mobileNav.onClose} />
               )}

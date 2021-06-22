@@ -4,6 +4,7 @@ import {
   ChakraComponent,
   ListItem,
   UnorderedList,
+  Text,
 } from "@chakra-ui/react"
 
 import { Link } from "gatsby"
@@ -23,32 +24,43 @@ const TOCItem: ChakraComponent<
   { items: TOCItems; onItemClick?: () => void }
 > = ({ className, items, ml = 0, onItemClick }) => {
   return (
-    <UnorderedList
-      spacing=".25rem"
-      ml={ml}
-      listStyleType="none"
-      className={className}
-    >
-      {items.map(items => (
-        <ListItem key={items.title}>
-          <Link to={items.url}>
-            <Button
-              size="sm"
-              variant="ghost"
-              w="full"
-              rounded="full"
-              justifyContent="left"
-              onClick={onItemClick}
-            >
-              {items.title}
-            </Button>
-          </Link>
-          {items.items ? (
-            <TOCItem ml="1rem" items={items.items} onItemClick={onItemClick} />
-          ) : null}
-        </ListItem>
-      ))}
-    </UnorderedList>
+    <div>
+      {ml === 0 && (
+        <Text fontWeight="black" my="2">
+          目次
+        </Text>
+      )}
+      <UnorderedList
+        spacing=".25rem"
+        ml={ml}
+        listStyleType="none"
+        className={className}
+      >
+        {items.map(items => (
+          <ListItem key={items.title}>
+            <Link to={items.url}>
+              <Button
+                size="sm"
+                variant="ghost"
+                w="full"
+                rounded="full"
+                justifyContent="left"
+                onClick={onItemClick}
+              >
+                {items.title}
+              </Button>
+            </Link>
+            {items.items ? (
+              <TOCItem
+                ml="1rem"
+                items={items.items}
+                onItemClick={onItemClick}
+              />
+            ) : null}
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </div>
   )
 }
 
