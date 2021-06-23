@@ -17,7 +17,7 @@
     "framer-motion": "^4.1.17",
     "gatsby": "^3.7.0",
     "gatsby-plugin-emotion": "^6.7.0",
-    "gatsby-plugin-image": "^1.7.0",
+    "gatsby-plugin-image": "^1.8.0",
     "gatsby-plugin-manifest": "^3.7.0",
     "gatsby-plugin-mdx": "^2.7.0",
     "gatsby-plugin-offline": "^4.7.0",
