@@ -17,15 +17,21 @@ import {
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
+  Text,
 } from "@chakra-ui/react"
 import { HTMLChakraProps } from "@chakra-ui/system"
 import { Link } from "gatsby"
 import { FaBars, FaCalendarDay, FaInfoCircle } from "react-icons/fa"
 import { useMatch } from "@reach/router"
 
-import Title from "./title"
+import Title from "../../title"
+import { TableOfContents, TOC } from "../../tableOfContents"
 
-const HeaderContent = () => {
+type Props = {
+  toc?: TOC
+}
+
+const HeaderContent: React.VFC<Props> = ({ toc }) => {
   const mobileNav = useDisclosure()
 
   const padding = useBreakpointValue({ base: "3", md: "6" })
@@ -39,7 +45,7 @@ const HeaderContent = () => {
       gridGap={3}
     >
       <IconButton
-        display={{ base: "flex", sm: "none" }}
+        display={{ base: "flex", md: "none" }}
         aria-label="nav-drawer-open"
         variant="ghost"
         isRound
@@ -95,6 +101,9 @@ const HeaderContent = () => {
                   </Link>
                 </ListItem>
               </UnorderedList>
+              {toc && (
+                <TableOfContents toc={toc} onItemClick={mobileNav.onClose} />
+              )}
             </nav>
           </DrawerBody>
         </DrawerContent>
@@ -103,7 +112,7 @@ const HeaderContent = () => {
       <Title fontSize="3xl" />
 
       <Spacer />
-      <Flex display={{ base: "none", sm: "flex" }} align="center" gridGap="2">
+      <Flex display={{ base: "none", lg: "flex" }} align="center" gridGap="2">
         <Link to="/blog">
           <Button
             leftIcon={<FaCalendarDay />}
@@ -127,7 +136,10 @@ const HeaderContent = () => {
   )
 }
 
-const Header = (props: HTMLChakraProps<"header">) => {
+const Header: React.VFC<HTMLChakraProps<"header"> & Props> = ({
+  toc,
+  ...props
+}) => {
   const ref = React.useRef<HTMLHeadingElement>(null)
   const bg = useColorModeValue("white", "gray.800")
   const shadow = useColorModeValue("md", "xl")
@@ -146,7 +158,7 @@ const Header = (props: HTMLChakraProps<"header">) => {
       {...props}
     >
       <chakra.div height="4rem" mx="auto" maxW="8xl">
-        <HeaderContent />
+        <HeaderContent toc={toc} />
       </chakra.div>
     </chakra.header>
   )
