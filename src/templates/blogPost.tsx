@@ -21,6 +21,7 @@ export const query = graphql`
       }
       body
       excerpt(truncate: true)
+      tableOfContents
     }
   }
 `
@@ -33,7 +34,7 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
     { base: "none", md: "xl" }
   )
   return (
-    <Layout>
+    <Layout toc={data.mdx?.tableOfContents}>
       <SEO
         title={data.mdx?.frontmatter?.title}
         description={data.mdx?.excerpt}
