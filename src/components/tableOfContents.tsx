@@ -46,6 +46,7 @@ const TOCItem: ChakraComponent<
                 rounded="full"
                 justifyContent="left"
                 onClick={onItemClick}
+                mt="1"
               >
                 {items.title}
               </Button>
@@ -74,7 +75,7 @@ export const TableOfContents: React.VFC<TableOfContentsProps> = ({
   toc: { items = null },
 }) =>
   items && (
-    <Box pb="1rem">
+    <Box pb="1rem" w="full">
       <TOCItem items={items} onItemClick={onItemClick} />
     </Box>
   )

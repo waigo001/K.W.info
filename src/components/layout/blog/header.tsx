@@ -45,7 +45,7 @@ const HeaderContent: React.VFC<Props> = ({ toc }) => {
       gridGap={3}
     >
       <IconButton
-        display={{ base: "flex", sm: "none" }}
+        display={{ base: "flex", md: "none" }}
         aria-label="nav-drawer-open"
         variant="ghost"
         isRound
@@ -100,7 +100,7 @@ const HeaderContent: React.VFC<Props> = ({ toc }) => {
                     </Button>
                   </Link>
                 </ListItem>
-              </UnorderedList>             
+              </UnorderedList>
               {toc && (
                 <TableOfContents toc={toc} onItemClick={mobileNav.onClose} />
               )}
@@ -112,7 +112,7 @@ const HeaderContent: React.VFC<Props> = ({ toc }) => {
       <Title fontSize="3xl" />
 
       <Spacer />
-      <Flex display={{ base: "none", sm: "flex" }} align="center" gridGap="2">
+      <Flex display={{ base: "none", lg: "flex" }} align="center" gridGap="2">
         <Link to="/blog">
           <Button
             leftIcon={<FaCalendarDay />}
@@ -136,7 +136,10 @@ const HeaderContent: React.VFC<Props> = ({ toc }) => {
   )
 }
 
-const Header = (props: HTMLChakraProps<"header"> & Props) => {
+const Header: React.VFC<HTMLChakraProps<"header"> & Props> = ({
+  toc,
+  ...props
+}) => {
   const ref = React.useRef<HTMLHeadingElement>(null)
   const bg = useColorModeValue("white", "gray.800")
   const shadow = useColorModeValue("md", "xl")
@@ -155,7 +158,7 @@ const Header = (props: HTMLChakraProps<"header"> & Props) => {
       {...props}
     >
       <chakra.div height="4rem" mx="auto" maxW="8xl">
-        <HeaderContent toc={props.toc} />
+        <HeaderContent toc={toc} />
       </chakra.div>
     </chakra.header>
   )
