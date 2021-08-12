@@ -14,10 +14,17 @@ export const query = graphql`
   query BlogPost($id: String!) {
     mdx(id: { eq: $id }) {
       frontmatter {
-        createdAt
-        updatedAt
-        tags
         title
+        Tags {
+          name
+          id
+        }
+        PublishedAt {
+          start
+        }
+        UpdatedAt {
+          start
+        }
       }
       body
       excerpt(truncate: true)
@@ -47,8 +54,8 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
         rounded="lg"
       >
         <PostTime
-          updatedAt={data.mdx?.frontmatter?.updatedAt}
-          publishedAt={data.mdx?.frontmatter?.createdAt}
+          updatedAt={data.mdx?.frontmatter?.UpdatedAt?.start}
+          publishedAt={data.mdx?.frontmatter?.PublishedAt?.start}
         />
         <Text as="h1" fontSize="xl" fontWeight="semibold" my="2">
           {data.mdx?.frontmatter?.title}
@@ -58,9 +65,9 @@ const BlogPost: React.VFC<PageProps<GatsbyTypes.BlogPostQuery>> = ({
           <Text fontSize="sm">タグ</Text>
         </Flex>
         <Wrap spacing="2" my="2">
-          {data.mdx?.frontmatter?.tags !== undefined ? (
-            data.mdx?.frontmatter?.tags.map(key => (
-              <Tag props={key} key={key} />
+          {data.mdx?.frontmatter?.Tags ? (
+            data.mdx?.frontmatter?.Tags.map(key => (
+              <Tag name={key?.name} key={key?.id} id={key?.id} />
             ))
           ) : (
             <></>

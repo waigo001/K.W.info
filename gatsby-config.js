@@ -20,13 +20,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: `posts`,
-        path: `${__dirname}/posts`,
-      },
-    },
-    {
       resolve: "gatsby-plugin-image",
       options: {
         defaults: {
@@ -71,6 +64,15 @@ module.exports = {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
         resetCSS: true,
+      },
+    },
+    {
+      resolve: `gatsby-source-notion-api`,
+      options: {
+        token: process.env.NOTION_TOKEN,
+        databaseId: process.env.NOTION_DATABASE,
+        propsToFrontmatter: true,
+        lowerTitleLevel: true,
       },
     },
     {
