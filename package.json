@@ -30,7 +30,7 @@
     "gatsby-remark-autolink-headers": "^4.4.0",
     "gatsby-source-filesystem": "^3.7.0",
     "gatsby-source-notion-api": "^0.10.0",
-    "gatsby-transformer-sharp": "^3.10.0",
+    "gatsby-transformer-sharp": "^3.11.0",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.2",
     "react-div-100vh": "^0.6.0",
