@@ -2,15 +2,16 @@ import React from "react"
 import { Tag as ChakraTag, TagLabel } from "@chakra-ui/react"
 
 type Props = {
-  props?: string
+  name?: string
+  id?: string
 }
 
-const Tag: React.FC<Props> = ({ props }) => {
+const Tag: React.FC<Props> = ({ name, id }) => {
   let contents = <></>
-  if (props) {
+  if (name && id) {
     contents = (
-      <ChakraTag key={props} borderRadius="full" variant="outline">
-        <TagLabel> {props}</TagLabel>
+      <ChakraTag key={id} borderRadius="full" variant="outline">
+        <TagLabel> {name}</TagLabel>
       </ChakraTag>
     )
   }

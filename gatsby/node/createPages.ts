@@ -1,3 +1,4 @@
+import { format, parseISO } from "date-fns"
 import { GatsbyNode } from "gatsby"
 import Path from "path"
 
@@ -6,7 +7,17 @@ const BlogTemplate = Path.resolve("./src/templates/blog.tsx")
 
 export type GatsbyNodeQuery = {
   readonly allMdx: {
-    readonly nodes: ReadonlyArray<Pick<GatsbyTypes.Mdx, "id" | "slug">>
+    readonly nodes: ReadonlyArray<
+      Pick<GatsbyTypes.Mdx, "id"> & {
+        readonly frontmatter: GatsbyTypes.Maybe<
+          Pick<GatsbyTypes.MdxFrontmatter, "slug"> & {
+            readonly PublishedAt: GatsbyTypes.Maybe<
+              Pick<GatsbyTypes.MdxFrontmatterPublishedAt, "start">
+            >
+          }
+        >
+      }
+    >
   }
 }
 
@@ -21,18 +32,25 @@ export const createPages: GatsbyNode["createPages"] = async ({
     context: {
       statusList:
         process.env.NODE_ENV === "production"
-          ? ["public"]
-          : ["public", "private"],
+          ? ["Public"]
+          : ["Public", "Private"],
     },
   })
 
   const result = await graphql<GatsbyNodeQuery>(
     /* GraphQL */ `
       query BlogPaths($statusList: [String!]!) {
-        allMdx(filter: { frontmatter: { status: { in: $statusList } } }) {
+        allMdx(
+          filter: { frontmatter: { Status: { name: { in: $statusList } } } }
+        ) {
           nodes {
             id
-            slug
+            frontmatter {
+              slug
+              PublishedAt {
+                start
+              }
+            }
           }
         }
       }
@@ -40,8 +58,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
     {
       statusList:
         process.env.NODE_ENV === "production"
-          ? ["public"]
-          : ["public", "private"],
+          ? ["Public"]
+          : ["Public", "Private"],
     }
   )
 
@@ -57,7 +75,15 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   const { allMdx } = result.data
 
-  for (const { slug, id } of allMdx.nodes) {
+  for (const { frontmatter, id } of allMdx.nodes) {
+    const slug =
+      format(
+        parseISO(frontmatter?.PublishedAt?.start || "19700101T000000Z"),
+        "yyyy-MM-dd"
+      ) +
+      "-" +
+      frontmatter?.slug
+
     console.info(`  "creating BlogPostPage - ${slug}`)
     createPage({
       path: `/blog/${slug}`,

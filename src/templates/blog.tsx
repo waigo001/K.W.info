@@ -8,17 +8,24 @@ import { SimpleGrid } from "@chakra-ui/react"
 export const query = graphql`
   query BlogPages($statusList: [String!]!) {
     allMdx(
-      sort: { fields: frontmatter___updatedAt, order: DESC }
-      filter: { frontmatter: { status: { in: $statusList } } }
+      sort: { fields: frontmatter___UpdatedAt___start, order: DESC }
+      filter: { frontmatter: { Status: { name: { in: $statusList } } } }
     ) {
       nodes {
         id
-        slug
         frontmatter {
           title
-          tags
-          createdAt
-          updatedAt
+          Tags {
+            name
+            id
+          }
+          PublishedAt {
+            start
+          }
+          UpdatedAt {
+            start
+          }
+          slug
         }
       }
     }
@@ -40,7 +47,7 @@ const BlogPage: React.VFC<PageProps<GatsbyTypes.BlogPagesQuery>> = ({
         {data.allMdx.nodes.map(node => (
           <BlogCard
             node={node}
-            key={node.slug}
+            key={node.id}
             url={data.site?.siteMetadata?.siteUrl}
           />
         ))}

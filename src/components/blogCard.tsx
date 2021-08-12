@@ -14,23 +14,41 @@ import {
   Wrap,
 } from "@chakra-ui/react"
 import { FaClipboard, FaTags, FaTwitter } from "react-icons/fa"
+import { format, parseISO } from "date-fns"
 
 type Props = {
-  node: Pick<GatsbyTypes.Mdx, "id" | "slug"> & {
+  node: Pick<GatsbyTypes.Mdx, "id"> & {
     readonly frontmatter: GatsbyTypes.Maybe<
-      Pick<
-        GatsbyTypes.MdxFrontmatter,
-        "title" | "tags" | "createdAt" | "updatedAt"
-      >
+      Pick<GatsbyTypes.MdxFrontmatter, "title" | "slug"> & {
+        readonly Tags: GatsbyTypes.Maybe<
+          ReadonlyArray<
+            GatsbyTypes.Maybe<
+              Pick<GatsbyTypes.MdxFrontmatterTags, "name" | "id">
+            >
+          >
+        >
+        readonly PublishedAt: GatsbyTypes.Maybe<
+          Pick<GatsbyTypes.MdxFrontmatterPublishedAt, "start">
+        >
+        readonly UpdatedAt: GatsbyTypes.Maybe<
+          Pick<GatsbyTypes.MdxFrontmatterUpdatedAt, "start">
+        >
+      }
     >
   }
   url?: string
 }
 
 const BlogCard: React.VFC<Props> = ({ node, url }) => {
-  const { hasCopied, onCopy } = useClipboard(
-    url ? url + `/blog/` + node.slug : ""
-  )
+  const slug =
+    format(
+      parseISO(node.frontmatter?.PublishedAt?.start || "19700101T000000Z"),
+      "yyyy-MM-dd"
+    ) +
+    "-" +
+    node.frontmatter?.slug
+
+  const { hasCopied, onCopy } = useClipboard(url ? url + `/blog/` + slug : "")
 
   const bg = useColorModeValue("white", "gray.800")
   const shadow = useColorModeValue("md", "xl")
@@ -45,13 +63,13 @@ const BlogCard: React.VFC<Props> = ({ node, url }) => {
       h="100%"
     >
       <PostTime
-        updatedAt={node.frontmatter?.updatedAt}
-        publishedAt={node.frontmatter?.createdAt}
+        updatedAt={node.frontmatter?.UpdatedAt?.start}
+        publishedAt={node.frontmatter?.PublishedAt?.start}
       />
       <Flex my="2">
         <Text
           as={Link}
-          to={`/blog/${node.slug}`}
+          to={`/blog/${slug}`}
           fontSize="xl"
           fontWeight="semibold"
         >
@@ -63,8 +81,10 @@ const BlogCard: React.VFC<Props> = ({ node, url }) => {
         <Text fontSize="sm">タグ</Text>
       </Flex>
       <Wrap spacing="2" my="2">
-        {node.frontmatter?.tags ? (
-          node.frontmatter?.tags.map(key => <Tag props={key} key={key} />)
+        {node.frontmatter?.Tags ? (
+          node.frontmatter?.Tags.map(key => (
+            <Tag name={key?.name} key={key?.id} id={key?.id} />
+          ))
         ) : (
           <></>
         )}
@@ -77,7 +97,7 @@ const BlogCard: React.VFC<Props> = ({ node, url }) => {
             `http://twitter.com/share?url=` +
             url +
             `/blog/` +
-            node.slug +
+            slug +
             `&hashtags=kwinfo` +
             `&text=` +
             node.frontmatter?.title
