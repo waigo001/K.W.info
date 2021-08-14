@@ -12,6 +12,7 @@ import {
 import Title from "../../title"
 import IconLink from "../../iconLink"
 import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
+import { format } from "date-fns"
 
 const FooterContent = () => {
   const padding = useBreakpointValue({ base: "4", md: "6" })
@@ -29,7 +30,7 @@ const FooterContent = () => {
         <Box as="span" display={{ base: "none", sm: "inline" }}>
           Copyright&nbsp;
         </Box>
-        &copy; 2021&nbsp;
+        &copy; {format(new Date(), "yyyy")}&nbsp;
         <Title />
         <Box as="span" display={{ base: "none", md: "inline" }}>
           &nbsp;&nbsp;All rights reserved.

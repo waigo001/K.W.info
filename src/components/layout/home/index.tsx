@@ -17,6 +17,7 @@ import { Link } from "gatsby"
 import Title from "../../title"
 import { use100vh } from "react-div-100vh"
 import IconLink from "../../iconLink"
+import { format } from "date-fns"
 
 type Props = {
   children: ReactNode
@@ -83,7 +84,8 @@ const indexPage: React.VFC<Props> = ({ children }) => {
           align="center"
           m={8}
         >
-          Copyright &copy; 2020 <Title />
+          Copyright &copy; {format(new Date(), "yyyy")}&nbsp;
+          <Title />
         </Text>
         <Text
           fontSize="xs"
