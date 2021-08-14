@@ -11,6 +11,12 @@ module.exports = {
     twitter: "@waigo001",
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-N5R5F3X",
+      },
+    },
     "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-source-filesystem",
